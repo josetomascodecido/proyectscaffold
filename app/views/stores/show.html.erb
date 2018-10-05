@@ -1,0 +1,25 @@
+<div class="row mb-5">
+  <div class="container mb-5">
+    <p id="notice"><%= notice %></p>
+
+    <p>
+      <strong>Name:</strong>
+      <%= @store.name %>
+    </p>
+
+    <p>
+      <strong>Products:</strong>
+      <% @store.products.each do |product| %>
+        <p>  <%= product.name %></p>
+        <p><%= product.description %> </p>
+        <p><%= image_tag product.image.to_s %> </p>
+        <p><%= product.price %> </p>
+      <% end %>
+    </p>
+
+    <%= link_to 'Edit', edit_store_path(@store) %> |
+    <%= link_to 'Back', stores_path %>|
+    <%= link_to 'New Product', new_store_product_path(@store) %>
+
+  </div>
+</div>
