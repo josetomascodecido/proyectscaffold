@@ -10,6 +10,7 @@ gem 'rails', '~> 5.2.1'
 gem 'sqlite3'
 gem 'bootstrap', '~> 4.1.3'
 gem 'jquery-rails'
+gem 'rails-erd', group: :development
 
 gem 'devise', git: 'https://github.com/plataformatec/devise.git'
 
