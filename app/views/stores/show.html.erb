@@ -2,24 +2,35 @@
   <div class="container mb-5">
     <p id="notice"><%= notice %></p>
 
-    <p>
-      <strong>Name:</strong>
-      <%= @store.name %>
-    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Image</th>
+          <th>Price</th>
+          <th>Store</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
 
-    <p>
-      <strong>Products:</strong>
-      <% @store.products.each do |product| %>
-        <p>  <%= product.name %></p>
-        <p><%= product.description %> </p>
-        <p><%= image_tag product.image.to_s %> </p>
-        <p><%= product.price %> </p>
-      <% end %>
-    </p>
+      <tbody>
+        <% @store.products.each do |product| %>
+          <tr>
+            <td><%= product.name %></td>
+            <td><%= product.description %></td>
+            <td><%= image_tag product.image.to_s %></td>
+            <td><%= product.price %></td>
+            <td><%= product.store.name  %></td>
+          </tr>
+      </tbody>
+      <%= link_to 'Edit', edit_store_path(@store), class: 'btn btn-primary' %> |
+      <%= link_to 'Back', stores_path, class: 'btn btn-primary' %>|
+      <%= link_to 'New Product', new_store_product_path(@store), class: 'btn btn-primary' %>
+    </table>
+    <% end %>
 
-    <%= link_to 'Edit', edit_store_path(@store) %> |
-    <%= link_to 'Back', stores_path %>|
-    <%= link_to 'New Product', new_store_product_path(@store) %>
+
 
   </div>
 
