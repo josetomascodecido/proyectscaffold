@@ -23,7 +23,10 @@
           <td><%= product.description %></td>
           <td><%= image_tag product.image.to_s %></td>
           <td><%= product.price %></td>
+
+
           <td><%= link_to 'Agregar Bandeja', orders_create_path %></td>
+
         </tr>
         <% end %>
       </tbody>
