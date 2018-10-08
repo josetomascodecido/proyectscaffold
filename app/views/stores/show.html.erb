@@ -2,21 +2,32 @@
   <div class="container mb-5">
     <p id="notice"><%= notice %></p>
 
-    <p>
-      <strong>Name:</strong>
-      <%= @store.name %>
-    </p>
 
-    <p>
-      <strong>Products:</strong>
-      <% @store.products.each do |product| %>
-        <p>  <%= product.name %></p>
-        <p><%= product.description %> </p>
-        <p><%= image_tag product.image.to_s %> </p>
-        <p><%= product.price %> </p>
-      <% end %>
-    </p>
-
+    <h1 class="text-center"><%= @store.name %></h1>
+    <h4><strong>Products:</strong></h4>
+    <table class="table table-bordered">
+  <thead>>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Image</th>
+          <th>Price</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @store.products.each do |product| %>
+        <tr>
+          <td><%= product.name %></td>
+          <td><%= product.description %></td>
+          <td><%= image_tag product.image.to_s %></td>
+          <td><%= product.price %></td>
+          <td><%= link_to 'Carrito de Compra', orders_create_path %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
     <%= link_to 'Edit', edit_store_path(@store) %> |
     <%= link_to 'Back', stores_path %>|
     <%= link_to 'New Product', new_store_product_path(@store) %>
