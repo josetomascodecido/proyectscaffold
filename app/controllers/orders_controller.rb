@@ -3,5 +3,6 @@ class OrdersController < ApplicationController
 
   end
   def add_product
+    
   end
 end
