@@ -4,21 +4,24 @@
     <h1 class="text-center"><%= @store.name %></h1>
     <h4><strong>Products:</strong></h4>
       <div class="row">
-        <div class="col-md-3 text-center">
+
         <% @store.products.each do |product| %>
-          <div class="card-deck my-3">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title"><%= product.name.capitalize! %></h5>
-                <img class="card-img-top"><%= image_tag product.image.to_s, style: "max-width: 100%" %></img>
-                <p class="card-text"><%= product.description.capitalize! %></p>
-                <p class="card-text"><small class="text-muted"><%= product.price %></small></p>
-                <p class="card-text"><small class="text-muted"><%= link_to 'Agregar Bandeja', orders_create_path, class: 'btn btn-success btn-block' %></small></p>
+        <div class="col-md-3 text-center">
+            <div class="card-deck my-3">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title"><%= product.name.capitalize! %></h5>
+                  <img class="card-img-top"><%= image_tag ("shawarma.jpg"), style: "max-width: 100%" %></img>
+                  <!-- <img class="card-img-top"><%= image_tag product.image.to_s, style: "max-width: 100%" %></img> -->
+                  <p class="card-text"><%= product.description.capitalize! %></p>
+                  <p class="card-text"><small class="text-muted"><%= product.price %></small></p>
+                  <p class="card-text"><small class="text-muted"><%= link_to 'Agregar Bandeja', orders_create_path, class: 'btn btn-success btn-block' %></small></p>
+                </div>
               </div>
             </div>
           </div>
           <% end %>
-        </div>
+
       </div>
       <%= link_to 'Edit', edit_store_path(@store), class: 'btn btn-primary' %> |
       <%= link_to 'Back', stores_path, class: 'btn btn-primary' %>|

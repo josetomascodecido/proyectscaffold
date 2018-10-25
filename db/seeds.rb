@@ -5,4 +5,17 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-Product.destroy_all
+#
+
+10.times do |i|
+  @store = Store.create(name: "tienda#{i + 1}", rut: '12345678')
+  10.times do |j|
+    Product.create(
+                  name: "producto#{j + 1}",
+                  description: 'papa fritas',
+                  image:"image_tag shawarma",
+                  price: 2000,
+                  store_id: @store.id
+    )
+  end
+end
