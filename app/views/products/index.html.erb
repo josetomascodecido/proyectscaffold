@@ -25,7 +25,7 @@
             <td><%= product.price %></td>
             <td><%= product.store.name  %></td>
             <td><%= link_to 'Show', store_product_path(@store, product) %></td>
-            <td><%= link_to 'Edit',edit_store_product_path(@store,product) %></td>
+            <td><%= link_to 'Edit',edit_store_product_path(@store, product) %></td>
             <td><%= link_to 'Destroy', store_product_url(@store,product), method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>
         <% end %>
