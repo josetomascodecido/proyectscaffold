@@ -1,5 +1,6 @@
-class OrdersController < ApplicationController
+# frozen_string_literal: true
 
+class OrdersController < ApplicationController
   def create
     @store = Store.find(params[:store_id])
     @product = Product.find(params[:product_id])
