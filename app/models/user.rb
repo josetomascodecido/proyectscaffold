@@ -4,5 +4,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :orders
-  has_many :products, through: :orders
+  # has_many :products, through: :orders
+  # scope -> { ordes.where(payr) }
+
+  def cart
+    orders.where(payed: false)
+  end
 end

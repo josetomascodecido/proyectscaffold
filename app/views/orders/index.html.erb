@@ -1,0 +1,11 @@
+<% @orders.each do |order| %>
+  <h5>
+    <%= order.product.name %>
+    <%= order.product.description %>
+    <%= order.product.price %>
+  </h5>
+<% end %>
+
+<h5>
+  Total: <%= @total %>
+</h5>
