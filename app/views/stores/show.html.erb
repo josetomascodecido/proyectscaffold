@@ -6,17 +6,14 @@
       <div class="row">
 
         <% @store.products.each do |product| %>
-        <div class="col-md-3 text-center">
-            <div class="card-deck my-3">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title"><%= product.name.capitalize! %></h5>
-                  <img class="card-img-top"><%= image_tag ("shawarma.jpg"), style: "max-width: 100%" %></img>
-                  <!-- <img class="card-img-top"><%= image_tag product.image.to_s, style: "max-width: 100%" %></img> -->
-                  <p class="card-text"><%= product.description.capitalize! %></p>
-                  <p class="card-text"><small class="text-muted"><%= product.price %></small></p>
-                  <p class="card-text"><small class="text-muted"><%= link_to 'Agregar Bandeja', orders_create_path, class: 'btn btn-success btn-block' %></small></p>
-                </div>
+          <div class="card-deck my-3">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title"><%= product.name.capitalize! %></h5>
+                <img class="card-img-top"><%= image_tag product.image.to_s, style: "max-width: 100%" %></img>
+                <p class="card-text"><%= product.description.capitalize! %></p>
+                <p class="card-text"><small class="text-muted"><%= product.price %></small></p>
+                <p class="card-text"><small class="text-muted"><%= link_to 'Agregar Bandeja', store_product_orders_path(@store, product), class: 'btn btn-success btn-block', method: :post %></small></p>
               </div>
             </div>
           </div>
