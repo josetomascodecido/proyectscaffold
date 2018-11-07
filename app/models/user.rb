@@ -6,7 +6,7 @@ class User < ApplicationRecord
   has_many :orders
   # has_many :products, through: :orders
   # scope -> { ordes.where(payr) }
-
+  enum role:[:admin, :user, :visit, :local_admin]
   def cart
     orders.where(payed: false)
   end
