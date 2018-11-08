@@ -1,28 +1,18 @@
 <p id="notice"><%= notice %></p>
-  <h1>Stores</h1>
-<div class="table-responsive-sm">
+<div class="table-responsive-sm ">
+  <h1 class="offset-5">Stores</h1>
 
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Rut</th>
-        <th scope="col">imagen</th>
-        <th scope="col">show</th>
-        <th scope="col">edit</th>
-        <th scope="col">destroy</th>
-      </tr>
-    </thead>
-
+  <table class="table offset-3 col-md-7">
     <tbody>
       <% @stores.each do |store| %>
         <tr scope="row">
-          <td><%= store.name %></td>
-          <td><%= store.rut %></td>
-          <td>imagen</td>
-          <td><%= link_to 'Show', store %></td>
-          <td><%= link_to 'Edit', edit_store_path(store) %></td>
-          <td><%= link_to 'Destroy', store, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= image_tag 'shawarma.jpg', class:"rounded", style: 'height:25%;width:auto'%></td>
+          <td><h3 style="margin-top: 1rem;"  class="text-primary"><%= link_to store.name, store%></h3></td>
+          <td>
+            <p class="btn btn-primary btn-lg" style="margin-top: 1rem;" ><%= link_to 'Menu', store %></p>
+            <p class="btn btn-primary btn-lg" style="margin-top: 1rem;" ><%= link_to 'Edit', edit_store_path(store) %></p>
+            <p class="btn btn-primary btn-lg" style="margin-top: 1rem;" ><%= link_to 'Destroy', store, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+          </td>
         </tr>
       <% end %>
     </tbody>
@@ -34,5 +24,4 @@
     <div class="col-md-4 offset-md-5">
       <%= link_to 'New Store', new_store_path %>
     </div>
-
   </div>

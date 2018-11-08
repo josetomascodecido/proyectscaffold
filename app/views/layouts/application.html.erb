@@ -6,14 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <style>
+    body{
+
+         background: url('<%= asset_path  "fondo3.jpg"%>')
+
+      }
+
+
+    </style>
   </head>
 
   <body>
 
     <%= render 'layouts/navbar' %>
+    <%= render 'layouts/carousel' %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>
-    <!-- <%= render 'layouts/footer' %> -->
   </body>
 </html>
