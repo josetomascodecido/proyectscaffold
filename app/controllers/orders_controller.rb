@@ -1,12 +1,10 @@
-<<<<<<< HEAD
+
 class OrdersController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
-=======
+
 # frozen_string_literal: true
 
-class OrdersController < ApplicationController
->>>>>>> 5752f59d0a1529ebf8064968ae2fd016811ce321
   def create
     @store = Store.find(params[:store_id])
     @product = Product.find(params[:product_id])

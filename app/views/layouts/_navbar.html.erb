@@ -21,24 +21,13 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <% if user_signed_in?  %>
-<<<<<<< HEAD
+
           <%= link_to "salir", destroy_user_session_path, class: "dropdown-item", method: :delete%>
           <% else %>
             <%= link_to "Registrarse", new_user_registration_path, class: "dropdown-item"%>
             <%= link_to "Ingresar", new_user_session_path, class: "dropdown-item"%>
           <% end %>
         </div>
-=======
-            <a class="dropdown-item" href="#"><%= %> </a>
-            <a class="dropdown-item" href="#"><%= link_to "Edit", edit_user_registration_path%> </a>
-            <a class="dropdown-item" href="#"><%= link_to "Salir", destroy_user_session_path, method: :delete %></a>
-          <% else %>
-            <a class="dropdown-item" href="#"><%= link_to "Registrarse", new_user_registration_path%> </a>
-            <a class="dropdown-item" href="#"><%= link_to "Ingresar", new_user_session_path%></a>
-          <% end %>
-        </div>
-
->>>>>>> 5752f59d0a1529ebf8064968ae2fd016811ce321
       </li>
     </ul>
   </div>
