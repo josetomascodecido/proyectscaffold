@@ -7,6 +7,8 @@ class User < ApplicationRecord
   # has_many :products, through: :orders
   # scope -> { ordes.where(payr) }
   enum role:[:admin, :user, :visit, :local_admin]
+  geocoded_by :address
+  after_validation :geocode
   def cart
     orders.where(payed: false)
   end
