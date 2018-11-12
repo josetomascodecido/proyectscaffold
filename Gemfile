@@ -12,6 +12,7 @@ gem 'geocoder'
 gem 'gmaps4rails'
 #gem cancancan
 gem 'cancancan', '~> 2.0'
+gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 
 gem 'rails-erd', group: :development
 

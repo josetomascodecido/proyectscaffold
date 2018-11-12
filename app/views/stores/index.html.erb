@@ -3,6 +3,9 @@
   <h1 class="offset-5">Stores</h1>
 
   <table class="table offset-3 col-md-7">
+    <div style='width: 800px;'>
+      <div id="map" style='width: 800px; height: 400px;'></div>
+    </div>
     <tbody>
       <% @stores.each do |store| %>
         <tr scope="row">
@@ -25,3 +28,12 @@
       <%= link_to 'New Store', new_store_path %>
     </div>
   </div>
+  <script>
+  handler = Gmaps.build('Google');
+  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+    markers = handler.addMarkers(<%= raw @hash.to_json %>);
+
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
+  });
+  </script>
