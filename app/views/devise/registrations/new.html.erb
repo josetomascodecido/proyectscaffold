@@ -56,8 +56,20 @@
 
   <script>
     $("#find-address").click(function(event){
+
       // event.preventDeafault();
-      alert("click");
+
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(getAddress);
+        } else {
+          x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+      
+      function getAddress(position) {
+        // x.innerHTML = "Latitude: " + position.coords.latitude +
+        // "<br>Longitude: " + position.coords.longitude;
+        alert(position.coords.latitude);
+      }
     })
 
 
