@@ -57,7 +57,8 @@
   <script>
     $("#find-address").click(function(event){
 
-      // event.preventDeafault();
+      $(this).html('<i class="fa fa-spinner fa-spin"> </i>')
+      //
 
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(getAddress);
@@ -84,11 +85,11 @@
           console.log("error");
         })
         .always(function() {
-          console.log("complete");
+          $("#find-address").html('<i class="fa fa-map-marker> </i>');
         });
 
       }
-  
+
 
 
   </script>
