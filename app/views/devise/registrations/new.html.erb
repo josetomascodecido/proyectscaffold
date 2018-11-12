@@ -64,13 +64,31 @@
         } else {
           x.innerHTML = "Geolocation is not supported by this browser.";
         }
-      
+      });
+
       function getAddress(position) {
         // x.innerHTML = "Latitude: " + position.coords.latitude +
         // "<br>Longitude: " + position.coords.longitude;
-        alert(position.coords.latitude);
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+        $.ajax({
+          url: '/geocoder/findaddress',
+          type: 'GET',
+          dataType: 'script',
+          data: {latitude: latitude, longitude: longitude }
+        })
+        .done(function() {
+          console.log("success");
+        })
+        .fail(function() {
+          console.log("error");
+        })
+        .always(function() {
+          console.log("complete");
+        });
+
       }
-    })
+  
 
 
   </script>
