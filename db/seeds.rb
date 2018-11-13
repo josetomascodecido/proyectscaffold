@@ -13,7 +13,7 @@
     Product.create(
                   name: "producto#{j + 1}",
                   description: 'papa fritas',
-                  image:"image_tag shawarma",
+                  image: File.open('shawarma.jpg'),
                   price: 2000,
                   store_id: @store.id
     )
