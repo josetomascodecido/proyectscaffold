@@ -38,7 +38,7 @@ Store.destroy_all
 addresses = addresses.split("\n")
 addresses.each do |address|
   @store = Store.create!(name: Faker::Name.name, address: address, rut: '12345678', image: Faker::Company.logo, )
-  sleep 1
+  
   10.times do |j|
       Product.create(
                     name: Faker::Food.dish,
