@@ -57,14 +57,14 @@
 
   <script>
     $("#find-address").click(function(event){
-
+      event.preventDefault();
       $(this).html('<i class="fa fa-spinner fa-spin"> </i>')
-      //
+
 
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(getAddress);
         } else {
-          x.innerHTML = "Geolocation is not supported by this browser.";
+          $("#find-address").innerHTML = "Geolocation is not supported by this browser.";
         }
       });
 
@@ -86,8 +86,12 @@
           console.log("error");
         })
         .always(function() {
-          $("#find-address").html('<i class="fa fa-map-marker> </i>');
+          console.log("complete");
         });
+
+        // .always(function() {
+        //   $("#find-address").html('<i class="fa fa-map-marker> </i>');
+        // });
 
       }
   </script>
