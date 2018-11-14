@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2018_11_12_031518) do
     t.integer "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "payed", default: false
+    t.boolean "payed"
     t.decimal "price"
     t.integer "quantity"
     t.index ["product_id"], name: "index_orders_on_product_id"

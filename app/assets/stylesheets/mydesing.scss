@@ -1,3 +1,55 @@
+// carousel
+.carousel a:hover{
+  background-color: #69878d;
+}
+.carousel {
+  border: 0.3rem solid #333;
+  margin: 3.1rem 0 -0.1rem 0 ;
+}
+.table{
+  color: floralwhite;
+  background-color:  #252525;
+  border: 0.1rem solid #333;
+}
+
+// Productos card
+
+.nombretienda{
+  border: 0.1rem solid #333;
+  background-color: #252525;
+  text-align: center;
+  margin:  -3.6rem 0 17px 0rem;
+  padding: 0.5rem 0 0.5rem 0.5rem;
+  color:floralwhite;
+}
+.tituloproductos{
+  border: 0.1rem solid #333;
+  background-color: #252525;
+  text-align: left;
+  margin:  -1.2rem 0 0.1rem 0rem;
+  padding: 0.5rem 0 0.5rem 0.5rem;
+  color:floralwhite;
+
+}
+
+.card{
+  border: 0.1rem solid #333;
+  background-color: #252525;
+  margin: 0 0 0 0;
+
+}
+
+.card-body{
+      color: white;
+      h5{
+        margin: 1rem 1rem 1rem 0rem;
+      }
+}
+.barralateral{
+  width: 1rem;
+  height: 100rem;
+  background-color: white;
+}
 
 .footer {
     position: fixed;
@@ -7,8 +59,4 @@
     background-color: red;
     color: white;
     text-align: center;
-}
-
-.carousel a:hover{
-  background-color: #69878d;
 }
