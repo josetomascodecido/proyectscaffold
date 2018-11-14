@@ -1,5 +1,5 @@
 Geocoder.configure(
  lookup: :google,
  timeout: 20,
- api_key: 'AIzaSyBnTeBmVf_wfewZcS0XuZBLRO6QIwI7R0Q'
+ api_key: 'AIzaSyCikaxMY3oZi_xxOxekH4DCCwFkl5Wuhcs'
 )

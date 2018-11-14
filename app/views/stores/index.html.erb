@@ -30,7 +30,7 @@
     }
   },
   function(){
-    markers = handler.addMarkers(<%=raw @hash.to_json %>);
+    markers = handler.addMarkers(<%= raw @hash.to_json %>);
     google.maps.event.addListener(handler.getMap(), "click", function(){
      console.log("hola");
     });

@@ -18,7 +18,7 @@ class StoresController < ApplicationController
     # )
     # no quiere funcar
   else
-    @stores = Store.first(10)  
+    @stores = Store.first(10)
   end
 
 
