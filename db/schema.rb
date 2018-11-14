@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_06_022729) do
+ActiveRecord::Schema.define(version: 2018_11_12_031518) do
 
   create_table "billings", force: :cascade do |t|
     t.integer "order_id"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 2018_11_06_022729) do
     t.datetime "updated_at", null: false
     t.boolean "payed"
     t.decimal "price"
+    t.integer "quantity"
     t.index ["product_id"], name: "index_orders_on_product_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
@@ -50,6 +51,10 @@ ActiveRecord::Schema.define(version: 2018_11_06_022729) do
     t.string "rut"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "image"
+    t.string "address"
+    t.float "latitude"
+    t.float "longitude"
   end
 
   create_table "users", force: :cascade do |t|
@@ -63,6 +68,9 @@ ActiveRecord::Schema.define(version: 2018_11_06_022729) do
     t.integer "role"
     t.string "name"
     t.string "lastname"
+    t.float "latitude"
+    t.float "longitude"
+    t.string "address"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

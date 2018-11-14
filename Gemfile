@@ -8,7 +8,11 @@ gem 'carrierwave', '~> 1.0'
 gem 'rails', '~> 5.2.1'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
-
+gem 'geocoder'
+gem 'gmaps4rails'
+#gem cancancan
+gem 'cancancan', '~> 2.0'
+gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 
 gem 'rails-erd', group: :development
 

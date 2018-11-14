@@ -1,8 +1,9 @@
-<% @orders.each do |order| %>
+<% @orders.uniq.each do |order| %>
   <h5>
     <%= order.product.name %>
     <%= order.product.description %>
     <%= order.product.price %>
+    <%= order.quantity %>
   </h5>
 <% end %>
 

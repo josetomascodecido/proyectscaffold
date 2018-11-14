@@ -1,5 +1,20 @@
 <p id="notice"><%= notice %></p>
-<div class="container">
+
+<div class="table-responsive-sm ">
+  <h1 class="offset-5">Stores</h1>
+
+  <table class="table offset-3 col-md-7">
+    <div style='width: 800px;'>
+      <div id="map" style='width: 800px; height: 400px;'></div>
+    </div>
+    <tbody id="stores-grl">
+      <%= render @stores %>
+    </tbody>
+  </table>
+  </div>
+
+  <br>
+
   <div class="row">
     <h1 class="offset-5">Stores</h1>
     <table class="table offset-3 col-md-7">
@@ -23,4 +38,34 @@
   <div class="col-md-4 offset-md-5">
     <%= link_to 'New Store', new_store_path %>
   </div>
-</div>
+
+  <script>
+  handler = Gmaps.build('Google');
+  handler.buildMap({
+    provider: {
+      center: new google.maps.LatLng({lat: -34, lng: -33}),
+      zoom: 4
+    },
+    internal: {
+      id: 'map'
+    }
+  },
+  function(){
+    markers = handler.addMarkers(<%= raw @hash.to_json %>);
+    google.maps.event.addListener(handler.getMap(), "click", function(){
+     console.log("hola");
+    });
+    google.maps.event.addListener(handler.getMap(), "center_changed", function(){
+     var latitude = handler.getMap().getCenter().lat();
+     var longitude = handler.getMap().getCenter().lng();
+     $.ajax({
+       url: '/stores',
+       type: 'GET',
+       dataType: 'script',
+       data: {latitude: latitude, longitude: longitude }
+     })
+      });
+  }
+);
+  </script>
+
