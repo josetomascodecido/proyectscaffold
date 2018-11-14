@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+  get 'geocoder/findaddress'
   devise_for :users, controllers: {
               registrations: 'users/registrations'
   }

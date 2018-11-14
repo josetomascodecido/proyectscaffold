@@ -3,18 +3,11 @@
   <h1 class="offset-5">Stores</h1>
 
   <table class="table offset-3 col-md-7">
-    <tbody>
-      <% @stores.each do |store| %>
-        <tr scope="row">
-          <td><%= image_tag 'shawarma.jpg', class:"rounded", style: 'height:25%;width:auto'%></td>
-          <td><h3 style="margin-top: 1rem;"  class="text-primary"><%= link_to store.name, store%></h3></td>
-          <td>
-            <p class="btn btn-primary btn-lg" style="margin-top: 1rem;" ><%= link_to 'Menu', store %></p>
-            <p class="btn btn-primary btn-lg" style="margin-top: 1rem;" ><%= link_to 'Edit', edit_store_path(store) %></p>
-            <p class="btn btn-primary btn-lg" style="margin-top: 1rem;" ><%= link_to 'Destroy', store, method: :delete, data: { confirm: 'Are you sure?' } %></p>
-          </td>
-        </tr>
-      <% end %>
+    <div style='width: 800px;'>
+      <div id="map" style='width: 800px; height: 400px;'></div>
+    </div>
+    <tbody id="stores-grl">
+      <%= render @stores %>
     </tbody>
   </table>
   </div>
@@ -25,3 +18,32 @@
       <%= link_to 'New Store', new_store_path %>
     </div>
   </div>
+  <script>
+  handler = Gmaps.build('Google');
+  handler.buildMap({
+    provider: {
+      center: new google.maps.LatLng({lat: -34, lng: -33}),
+      zoom: 4
+    },
+    internal: {
+      id: 'map'
+    }
+  },
+  function(){
+    markers = handler.addMarkers(<%= raw @hash.to_json %>);
+    google.maps.event.addListener(handler.getMap(), "click", function(){
+     console.log("hola");
+    });
+    google.maps.event.addListener(handler.getMap(), "center_changed", function(){
+     var latitude = handler.getMap().getCenter().lat();
+     var longitude = handler.getMap().getCenter().lng();
+     $.ajax({
+       url: '/stores',
+       type: 'GET',
+       dataType: 'script',
+       data: {latitude: latitude, longitude: longitude }
+     })
+      });
+  }
+);
+  </script>

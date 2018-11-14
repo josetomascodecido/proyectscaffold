@@ -4,7 +4,29 @@ class StoresController < ApplicationController
   # GET /stores
   # GET /stores.json
   def index
-    @stores = Store.all
+    if params[:latitude].present? && params[:longitude].present?
+    @stores = Store.near(
+      [params[:latitude], params[:longitude]],
+      10_000,
+      units: :km
+    )
+  elsif current_user.present?
+    # @stores = Store.near(
+    #  current_user.address,
+    #  10_000,
+    #  units: :km
+    # )
+    # no quiere funcar
+  else
+    @stores = Store.first(10)
+  end
+
+
+    @hash = Gmaps4rails.build_markers(@stores) do |store, marker|
+      marker.lat store.latitude
+      marker.lng store.longitude
+    end
+
   end
 
   # GET /stores/1
