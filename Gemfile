@@ -10,6 +10,7 @@ gem 'rails', '~> 5.2.1'
 gem 'sqlite3'
 gem 'geocoder'
 gem 'gmaps4rails'
+gem 'omniauth-facebook'
 #gem cancancan
 gem 'cancancan', '~> 2.0'
 gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
