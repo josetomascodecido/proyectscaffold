@@ -1,12 +1,21 @@
-<% @orders.each do |order| %>
-  <h5>
-    <%= order.product.name %>
-    <%= order.product.description %>
-    <%= order.product.price %>
-    <%= order.quantity %>
-  </h5>
-<% end %>
+<div class="" style="color:white">
+  <% @orders.each do |order| %>
 
-<h5>
-  Total: <%= @total %>
-</h5>
+
+    <h5>
+
+      <%= order.product.name %>
+      <%= order.product.description %>
+      <%= order.product.price %>
+      <%= order.quantity %>
+      <%= order.quantity * order.product.price %>
+
+    </h5>
+  <% end %>
+
+  <h5>
+
+    Total: <%= @total %>
+  </h5>
+
+</div>

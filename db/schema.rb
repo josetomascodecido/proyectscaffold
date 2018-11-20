@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2018_11_19_013029) do
     t.datetime "updated_at", null: false
     t.boolean "payed", default: false
     t.decimal "price"
-    t.integer "quantity"
+    t.integer "quantity", default: 0
     t.index ["product_id"], name: "index_orders_on_product_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
