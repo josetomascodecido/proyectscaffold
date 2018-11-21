@@ -1,10 +1,32 @@
 class StoresController < ApplicationController
   before_action :set_store, only: [:show, :edit, :update, :destroy]
-
+  load_and_authorize_resource
   # GET /stores
   # GET /stores.json
   def index
-    @stores = Store.all
+    if params[:latitude].present? && params[:longitude].present?
+    @stores = Store.near(
+      [params[:latitude], params[:longitude]],
+      10_000,
+      units: :km
+    )
+  elsif current_user.present?
+    # @stores = Store.near(
+    #  current_user.address,
+    #  10_000,
+    #  units: :km
+    # )
+    # no quiere funcar
+  else
+    @stores = Store.first(5)
+  end
+
+
+    @hash = Gmaps4rails.build_markers(@stores) do |store, marker|
+      marker.lat store.latitude
+      marker.lng store.longitude
+    end
+
   end
 
   # GET /stores/1
@@ -65,6 +87,7 @@ class StoresController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_store
       @store = Store.find(params[:id])
+
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -10,10 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_06_022729) do
+ActiveRecord::Schema.define(version: 2018_11_19_013029) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "billings", force: :cascade do |t|
-    t.integer "order_id"
+    t.bigint "order_id"
     t.string "code"
     t.string "payment_method"
     t.decimal "amount"
@@ -24,12 +27,13 @@ ActiveRecord::Schema.define(version: 2018_11_06_022729) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "product_id"
+    t.bigint "user_id"
+    t.bigint "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "payed", default: false
     t.decimal "price"
+    t.integer "quantity", default: 0
     t.index ["product_id"], name: "index_orders_on_product_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
@@ -39,7 +43,7 @@ ActiveRecord::Schema.define(version: 2018_11_06_022729) do
     t.text "description"
     t.string "image"
     t.decimal "price"
-    t.integer "store_id"
+    t.bigint "store_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["store_id"], name: "index_products_on_store_id"
@@ -50,6 +54,10 @@ ActiveRecord::Schema.define(version: 2018_11_06_022729) do
     t.string "rut"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "image"
+    t.string "address"
+    t.float "latitude"
+    t.float "longitude"
   end
 
   create_table "users", force: :cascade do |t|
@@ -63,8 +71,17 @@ ActiveRecord::Schema.define(version: 2018_11_06_022729) do
     t.integer "role"
     t.string "name"
     t.string "lastname"
+    t.float "latitude"
+    t.float "longitude"
+    t.string "address"
+    t.string "provider"
+    t.string "uid"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "billings", "orders"
+  add_foreign_key "orders", "products"
+  add_foreign_key "orders", "users"
+  add_foreign_key "products", "stores"
 end

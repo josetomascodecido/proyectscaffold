@@ -6,9 +6,13 @@ ruby '2.4.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'carrierwave', '~> 1.0'
 gem 'rails', '~> 5.2.1'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
-
+gem 'pg', '>= 0.18', '< 2.0'
+gem 'geocoder'
+gem 'gmaps4rails'
+gem 'omniauth-facebook'
+#gem cancancan
+gem 'cancancan', '~> 2.0'
+gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 
 gem 'rails-erd', group: :development
 
@@ -35,7 +39,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use ActiveStorage variant
-# gem 'mini_magick', '~> 4.8'
+gem 'mini_magick', '~> 4.8'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
