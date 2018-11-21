@@ -8,7 +8,7 @@
     <tbody>
       <% @stores.each do |store| %>
         <tr scope="row">
-          <td><%= image_tag 'shawarma.jpg', class:"rounded", style: 'height:25%;width:auto'%></td>
+          
           <td><h3 style="margin-top: 1rem;"  class="text-primary"><%= link_to store.name, store%></h3></td>
           <td>
             <p class="btn btn-primary btn-lg" style="margin-top: 1rem;" ><%= link_to 'Menu', store %></p>
@@ -77,4 +77,3 @@
   }
 );
   </script>
-
