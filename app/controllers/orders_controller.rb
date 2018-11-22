@@ -39,6 +39,25 @@ class OrdersController < ApplicationController
       @total += (price[0]*price[1]).to_i
     end
   end
+
+  def destroy
+    @order = Order.find(params[:store_id])
+
+    if @order.quantity == 1
+      if @order.destroy
+        redirect_to store_product_orders_path(:store_id, :product_id), notice: 'Carro actualizado'
+      else
+        redirect_to orders_path, alert: 'Error al actualizar el carro'
+      end
+    elsif @order.quantity > 1
+      @order.quantity -= 1
+      if @order.save
+        redirect_to orders_path, notice: 'Carro actualizado'
+      else
+        redirect_to orders_path, alert: 'Error al actualizar el carro'
+      end
+    end
+  end
   private
 
   def set_cart

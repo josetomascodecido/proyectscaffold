@@ -1,21 +1,74 @@
-<div class="" style="color:white">
+
+<div class="row" style="color:white">
+  <div class="col-md-2">
+    <%= link_to "Continuar comprando", store_path(:store_id), class: "btn btn-warning" %>
+  </div>
+
+  <div class="col-md-2 offset-md-8">
+    <%= link_to "Vaciar Carro", empty_cart_store_product_orders_path(:store_id, :product_id), class: "btn btn-danger", method: :delete %>
+  </div>
+</div>
+<table class="table table-hover">
+  <tr>
+    <th>
+      Producto
+    </th>
+    <th>
+      Description
+    </th>
+    <th>
+      Valor Unitario
+    </th>
+    <th>
+      Cantidad
+    </th>
+    <th>
+      Subtotal
+    </th>
+    <th>
+      Remover
+    </th>
+  </tr>
   <% @orders.each do |order| %>
-
-
-    <h5>
-
-      <%= order.product.name %>
-      <%= order.product.description %>
-      <%= order.product.price %>
-      <%= order.quantity %>
-      <%= order.quantity * order.product.price %>
-
-    </h5>
+    <tr>
+      <td>
+        <%= order.product.name %>
+      </td>
+      <td>
+        <%= order.product.description %>
+      </td>
+      <td>
+        <%= order.product.price %>
+      </td>
+      <td>
+        <%= order.quantity %>
+      </td>
+      <td>
+        <%= order.quantity * order.product.price %>
+      </td>
   <% end %>
 
-  <h5>
+<tr>
+  <th>
+    Total:
+  </th>
+  <th></th>
+  <th></th>
+  <th></th>
+  <th>
+    <%= @total %>
+  </th>
+</tr>
+</table>
+<div class="row">
+  <div class="col-md-2 offset-md-9">
+    <%= link_to "Confirmar Compra" %>
+  </div>
 
-    Total: <%= @total %>
-  </h5>
+</div>
+
+
+
+
 
 </div>
