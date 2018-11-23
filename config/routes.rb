@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   }
   resources :stores do
     resources :products do
-      resources :orders, only: [:index, :create] do
+      resources :orders, only: [:index, :create, :destroy] do
                 delete 'empty_cart', on: :collection
               end
       # buscar rutas custom to: as:

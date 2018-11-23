@@ -10,8 +10,8 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @store = Store.find(params[:store_id])
-    @product = Product.find(params[:product_id])
+    @store = Store.find(store_id: params[:store_id])
+    @product = Product.find(product_id: params[:product_id])
     @cart = current_user.cart
 
     if @cart.pluck(:product_id).include?(params[:product_id].to_i)
@@ -25,13 +25,14 @@ class OrdersController < ApplicationController
 
     if @order.save
 
-      redirect_to store_product_orders_path(@store, @product), notice: 'Tu producto fue agregado al carro!'
+      redirect_to @store, notice: 'Tu producto fue agregado al carro!'
     else
-      redirect_to store_path(@store), alert: 'Intenta nuevamente CTM!'
+      redirect_to @store, alert: 'Intenta nuevamente CTM!'
     end
   end
 
   def index
+    @store = Store.find(params[:store_id])
     @orders = current_user.cart
     @total = 0
     @price_quantity = current_user.orders.pluck(:price, :quantity)
@@ -41,22 +42,32 @@ class OrdersController < ApplicationController
   end
 
   def destroy
-    @order = Order.find(params[:store_id])
 
-    if @order.quantity == 1
-      if @order.destroy
-        redirect_to store_product_orders_path(:store_id, :product_id), notice: 'Carro actualizado'
-      else
-        redirect_to orders_path, alert: 'Error al actualizar el carro'
-      end
-    elsif @order.quantity > 1
-      @order.quantity -= 1
-      if @order.save
-        redirect_to orders_path, notice: 'Carro actualizado'
-      else
-        redirect_to orders_path, alert: 'Error al actualizar el carro'
+    @orders = current_user.orders.where(product_id: params[:product_id])
+
+    @orders.each do |order|
+      respond_to do |format|
+        if order.destroy
+          format.html { redirect_to store_product_orders_url, notice: 'eliminado exitosamente'}
+        else
+          format.html { redirect_to store_product_orders_url, notice: 'no pudimos eliminar tu producto'}
+        end
       end
     end
+  #   if @order.quantity == 1
+  #     if @order.destroy
+  #       redirect_to store_product_orders_path(:store_id, :product_id), notice: 'Carro actualizado'
+  #     else
+  #       redirect_to store_product_orders_path(:store_id, :product_id), alert: 'Error al actualizar el carro'
+  #     end
+  #   elsif @order.quantity > 1
+  #     @order.quantity -= 1
+  #     if @order.save
+  #       redirect_to store_product_orders_path(:store_id, :product_id), notice: 'Carro actualizado'
+  #     else
+  #       redirect_to store_product_orders_path(:store_id, :product_id), alert: 'Error al actualizar el carro'
+  #     end
+  #   end
   end
   private
 

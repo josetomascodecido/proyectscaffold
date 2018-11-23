@@ -32,6 +32,9 @@
   <% @orders.each do |order| %>
     <tr>
       <td>
+        <%= @store.name %>
+      </td>
+      <td>
         <%= order.product.name %>
       </td>
       <td>
@@ -45,6 +48,9 @@
       </td>
       <td>
         <%= order.quantity * order.product.price %>
+      </td>
+      <td>
+        <%= link_to 'Borrar', store_product_order_path(@store, order.product.id, order), class: "btn btn-danger btn-sm", method: :delete %>
       </td>
   <% end %>
 
@@ -62,7 +68,7 @@
 </table>
 <div class="row">
   <div class="col-md-2 offset-md-9">
-    <%= link_to "Confirmar Compra" %>
+    <%= link_to "Confirmar Compra", class: "btn btn-warning" %>
   </div>
 
 </div>
