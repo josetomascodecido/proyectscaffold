@@ -5,21 +5,10 @@
     <div class="row">
       <div class=" col-md-12 nombretienda">
         <h1><%= @store.name %></h1>
+        <h1>crear boton carrito para cada tienda en lugar de en el navbar</h1>
       </div>
 
-        <!-- <% @store.products.each do |product| %>
-          <div class="card-deck my-3">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title"><%= product.name.capitalize! %></h5>
-                <img class="card-img-top"><%= image_tag product.image.to_s, class:"rounded", style: 'height:25%;width:auto'%></img>
-                <p class="card-text"><%= product.description.capitalize! %></p>
-                <p class="card-text"><small class="text-muted"><%= product.price %></small></p>
-                <p class="card-text"><small class="text-muted"><%= link_to 'Agregar Bandeja', store_product_orders_path(@store, product), class: 'btn btn-success btn-block', method: :post %></small></p>
-              </div>
-            </div>
-          </div>
-          <% end %> -->
+
 
 
       <div class=" col-md-12 tituloproductos">
@@ -38,7 +27,7 @@
               <h5 class="card-title"><%= product.name %></h5>
               <p class="card-text"><%= product.description%></p>
               <p class="card-text"><small class="text-muted"><%= product.price %></small></p>
-              <p class="card-text"><%= link_to 'Agregar ', store_product_orders_path(@store, product), class: 'btn btn-danger float-right', method: :post %></p>
+              <p class="card-text"><%= link_to 'Agregar ', store_orders_path(@store, product_id: product), class: 'btn btn-danger float-right', method: :post %></p>
             </div>
           </div>
         </div>

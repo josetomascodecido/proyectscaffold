@@ -5,7 +5,7 @@
   </div>
 
   <div class="col-md-2 offset-md-8">
-    <%= link_to "Vaciar Carro", empty_cart_store_product_orders_path(:store_id, :product_id), class: "btn btn-danger", method: :delete %>
+    <%= link_to "Vaciar Carro", empty_cart_store_orders_path(:store_id), class: "btn btn-danger", method: :delete %>
   </div>
 </div>
 <table class="table table-hover">
@@ -50,7 +50,7 @@
         <%= order.quantity * order.product.price %>
       </td>
       <td>
-        <%= link_to 'Borrar', store_product_order_path(@store, order.product.id, order), class: "btn btn-danger btn-sm", method: :delete %>
+        <%= link_to 'Borrar', store_order_path(@store.id,  order), class: "btn btn-danger btn-sm", method: :delete %>
       </td>
   <% end %>
 
