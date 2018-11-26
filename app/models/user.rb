@@ -10,6 +10,8 @@ class User < ApplicationRecord
   enum role:[:admin, :user, :visit, :local_admin]
   geocoded_by :address
   after_validation :geocode
+
+  
   def cart
     orders.where(payed: false)
   end

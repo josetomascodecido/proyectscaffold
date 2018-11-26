@@ -16,6 +16,7 @@ index do
  column :email
  column :role
  column :address
+
 end
 
 end

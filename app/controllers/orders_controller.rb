@@ -10,8 +10,9 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @store = Store.find(store_id: params[:store_id])
-    @product = Product.find(product_id: params[:product_id])
+
+    @store = Store.find(params[:store_id])
+    @product = Product.find(params[:product_id])
     @cart = current_user.cart
 
     if @cart.pluck(:product_id).include?(params[:product_id].to_i)
@@ -20,7 +21,7 @@ class OrdersController < ApplicationController
       @order = product
     else
       product = current_user.orders.build(product_id: @product.id, price: @product.price, payed: false)
-      @order = Order.new(product_id: @product.id, user: current_user, price: @product.price, quantity: 1)
+      @order = Order.new(product_id: @product.id, user: current_user, store_id: @store.id, price: @product.price, quantity: 1)
     end
 
     if @order.save
@@ -33,9 +34,12 @@ class OrdersController < ApplicationController
 
   def index
     @store = Store.find(params[:store_id])
-    @orders = current_user.cart
+      @orders = Order.where(store_id: @store.id, user: current_user, payed: false)
+    @products = @orders.map do |order|
+      @products = Product.find(order.product.id)
+    end
     @total = 0
-    @price_quantity = current_user.orders.pluck(:price, :quantity)
+    @price_quantity = @orders.pluck(:price, :quantity)
     @price_quantity.each do |price|
       @total += (price[0]*price[1]).to_i
     end
@@ -43,18 +47,16 @@ class OrdersController < ApplicationController
 
   def destroy
 
-    @orders = current_user.orders.where(product_id: params[:product_id])
-
-    @orders.each do |order|
-      respond_to do |format|
-        if order.destroy
-          format.html { redirect_to store_product_orders_url, notice: 'eliminado exitosamente'}
+    @order = current_user.orders.find(params[:id])
+        respond_to do |format|
+        if @order.destroy
+          format.html { redirect_to store_orders_path(params[:store_id]), notice: 'eliminado exitosamente'}
         else
-          format.html { redirect_to store_product_orders_url, notice: 'no pudimos eliminar tu producto'}
-        end
+          format.html { redirect_to store_orders_path(params[:store_id]), notice: 'no pudimos eliminar tu producto'}
+
       end
     end
-  #   if @order.quantity == 1
+  # #   if @order.quantity == 1
   #     if @order.destroy
   #       redirect_to store_product_orders_path(:store_id, :product_id), notice: 'Carro actualizado'
   #     else
@@ -69,7 +71,10 @@ class OrdersController < ApplicationController
   #     end
   #   end
   end
+  
   private
+
+
 
   def set_cart
     @setcart = current_user.cart

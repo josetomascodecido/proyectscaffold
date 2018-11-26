@@ -37,14 +37,14 @@ Upland, CA 91784"
 Store.destroy_all
 addresses = addresses.split("\n")
 addresses.each do |address|
-  @store = Store.create!(name: Faker::Name.name, address: address, rut: '12345678', image: Faker::Company.logo, )
+  @stores = Store.create!(name: Faker::Name.name, address: address, rut: '12345678', image: Faker::Company.logo, )
  10.times do |j|
    Product.create(
                  name: "producto#{j + 1}",
                  description: 'papa fritas',
-                 
+
                  price: 2000,
-                 store_id: @store.id
+                 store_id: @stores.id
    )
   end
 
