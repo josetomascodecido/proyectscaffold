@@ -11,12 +11,42 @@ ActiveAdmin.register User do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
+permit_params :email, :password, :name, :lastname, :address, :role
+
 index do
  column :id
  column :email
  column :role
  column :address
-
+ column :member_since do |user|
+   time_ago_in_words(user.created_at)
+ end
+ actions
 end
-
+form do |f|
+    inputs 'Agregando un nuevo Usuario' do
+      input :email
+      input :password
+      input :name
+      input :lastname
+      input :address
+      input :role
+    end
+    actions
+  end
+  controller do
+    def update
+      if (params[:user][:password].blank? && params[:user][:password_confirmation].blank?)
+        params[:user].delete("password")
+        params[:user].delete("password_confirmation")
+      end
+      super
+    end
+  end
+  filter :email, as: :select
+  filter :password
+  filter :name
+  filter :lastname
+  filter :address
+  filter :role, as: :select
 end
