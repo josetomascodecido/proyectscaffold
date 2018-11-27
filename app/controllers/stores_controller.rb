@@ -18,7 +18,7 @@ class StoresController < ApplicationController
     # )
     # no quiere funcar
   else
-    @stores = Store.first(5)
+    @stores = Store.first(10)
   end
 
 
@@ -32,6 +32,7 @@ class StoresController < ApplicationController
   # GET /stores/1
   # GET /stores/1.json
   def show
+
   end
 
   # GET /stores/new
