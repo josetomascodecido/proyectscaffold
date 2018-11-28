@@ -1,43 +1,50 @@
-<%= form_for([@store, @product], local: true) do |form| %>
-  <% if product.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-md-10">
+      <%= form_for([@store, @product], local: true) do |form| %>
+        <% if product.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
 
-      <ul>
-      <% product.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+            <ul>
+            <% product.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="form-group">
+          <h1><%= form.label :image %></h1>
+          <%= form.text_field :image %>
+          <h5><%= form.file_field :image, id: :image  %></h5>
+        </div>
+
+        <div class="form-group">
+          <h1><%= form.label :name %></h1>
+          <%= form.text_field :name %>
+        </div>
+
+        <div class="form-group">
+          <h1><%= form.label :description %></h1>
+          <%= form.text_area :description %>
+        </div>
+
+
+        <div class="form-group">
+          <h1><%= form.label :price %></h1>
+          <%= form.text_field :price %>
+        </div>
+
+        <div class="form-group">
+          <h1><%= form.label :store_id %></h1>
+          <%= form.text_field :store_id %>
+        </div>
+
+        <div class="actions">
+          <%= form.submit %>
+        </div>
       <% end %>
-      </ul>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
   </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :image %>
-    <%= form.text_field :image %>
-    <%= form.file_field :image, id: :image  %>
-  </div>
-
-  <div class="field">
-    <%= form.label :price %>
-    <%= form.text_field :price %>
-  </div>
-
-  <div class="field">
-    <%= form.label :store_id %>
-    <%= form.text_field :store_id %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

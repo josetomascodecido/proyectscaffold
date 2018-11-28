@@ -1,27 +1,42 @@
-<%= form_with(model: store, local: true) do |form| %>
-  <% if store.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(store.errors.count, "error") %> prohibited this store from being saved:</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-md-10">
+      <%= form_with(model: store, local: true) do |form| %>
+        <% if store.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(store.errors.count, "error") %> prohibited this store from being saved:</h2>
 
-      <ul>
-      <% store.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+            <ul>
+            <% store.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="form-group">
+          <h1><%= form.label :name %></h1>
+          <%= form.text_field :name %>
+        </div>
+
+        <div class="form-group">
+          <h1><%= form.label :address %></h1>
+          <%= form.text_field :address %>
+        </div>
+
+        <div class="form-group">
+          <h1><%= form.label :rut%></h1>
+          <%= form.text_field :rut %>
+        </div>
+        <div class="form-group">
+          <h1><%= form.label :image %></h1>
+          <%= form.text_field :image %>
+        </div>
+
+        <div class="actions">
+          <%= form.submit %>
+        </div>
       <% end %>
-      </ul>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
   </div>
-
-  <div class="field">
-    <%= form.label :rut %>
-    <%= form.text_field :rut %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

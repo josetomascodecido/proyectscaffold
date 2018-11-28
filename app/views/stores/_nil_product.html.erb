@@ -1,0 +1,34 @@
+<%= render 'layouts/carousel' %>
+<div class="container">
+  <p id="notice"><%= notice %></p>
+    <div class="row">
+      <div class=" col-md-12 nombretienda">
+        <h1><%= @store.name %></h1>
+        <h1 class="text-center"><%= link_to 'carrito', store_orders_path(@store), class: 'btn btn-primary'%></h1>
+      </div>
+
+    <div class=" col-md-12 tituloproductos text-center">
+        <h1>Products:</h1>
+      </div>
+    </div>
+</div>
+<div class="container">
+  <div class="row">
+      <% @store.products.each do |product| %>
+      <div class=" col-sm-12 col-lg-3 ">
+        <div class="card-deck">
+          <div class="card">
+            <div class="card-body">
+              <img class="card-img-top rounded"><%= image_tag product.image.to_s, style: "max-width: 100%", class: "rounded" %></img>
+              <h5 class="card-title"><%= product.name %></h5>
+              <p class="card-text"><%= product.description%></p>
+              <p class="card-text"><small class="text-muted"><%= product.price %></small></p>
+              <p class="card-text"><%= link_to 'Agregar ', store_orders_path(@store, product_id: product), class: 'btn btn-danger float-right', method: :post %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+        <% end %>
+
+  </div>
+</div>

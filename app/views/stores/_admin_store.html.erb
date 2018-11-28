@@ -1,0 +1,18 @@
+<div class="container text-center">
+  <h1 class="text-center">Stores</h1>
+  <p  class="btn btn-primary btn-lg"> <%= link_to 'New Store', new_store_path %></p>
+  <table class="table text-center">
+    <tbody>
+      <% @stores.each do |store| %>
+        <tr scope="row">
+          <td><h3 style="margin-top: 1rem;"  class="text-primary"><%= link_to store.name, store%></h3></td>
+          <td>
+            <p class="btn btn-primary btn-lg" style="margin-top: 1rem;" ><%= link_to 'Menu', store %></p>
+            <p class="btn btn-primary btn-lg" style="margin-top: 1rem;" ><%= link_to 'Edit', edit_store_path(store) %></p>
+            <p class="btn btn-primary btn-lg" style="margin-top: 1rem;" ><%= link_to 'Destroy', store, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
