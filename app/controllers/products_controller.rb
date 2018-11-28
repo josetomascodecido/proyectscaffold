@@ -5,7 +5,6 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @store = Store.find(params[:id])
     @products = Product.all
   end
 
@@ -23,6 +22,7 @@ class ProductsController < ApplicationController
   # GET /products/1/edit
   def edit
     @store = Store.find(params[:store_id])
+    @product = Product.find(params[:id])
   end
 
   # POST /products
@@ -69,6 +69,7 @@ class ProductsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_product
       @product = Product.find(params[:id])
+      @store = Store.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

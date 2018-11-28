@@ -1,0 +1,16 @@
+<%= render 'layouts/carousel' %>
+  <div class="container text-center">
+    <h1 class="text-center">Stores</h1>
+    <table class="table text-center">
+      <tbody>
+        <% @stores.each do |store| %>
+          <tr scope="row">
+            <td><h3 style="margin-top: 1rem;"  class="text-primary text-left"><%= link_to store.name, store%></h3></td>
+            <td>
+              <p class="btn btn-primary btn-lg" style="margin-top: 1rem;" ><%= link_to 'Menu', store %></p>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>

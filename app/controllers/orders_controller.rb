@@ -5,8 +5,10 @@ class OrdersController < ApplicationController
 
 # frozen_string_literal: true
   def empty_cart
-    @setcart.destroy_all
-    redirect_to store_product_orders_path, notice: 'Se ha vaciado su bandeja'
+    @store = Store.find(params[:store_id])
+    @set_orders = Order.where(user: current_user, store_id: @store.id)
+    @set_orders.destroy_all
+    redirect_to store_orders_path(@store),  notice: 'Se ha vaciado su bandeja'
   end
 
   def create
@@ -34,7 +36,7 @@ class OrdersController < ApplicationController
 
   def index
     @store = Store.find(params[:store_id])
-      @orders = Order.where(store_id: @store.id, user: current_user, payed: false)
+     @orders = Order.where(store_id: @store.id, user: current_user, payed: false)
     @products = @orders.map do |order|
       @products = Product.find(order.product.id)
     end
@@ -71,7 +73,7 @@ class OrdersController < ApplicationController
   #     end
   #   end
   end
-  
+
   private
 
 
