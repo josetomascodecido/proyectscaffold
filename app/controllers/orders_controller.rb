@@ -36,8 +36,11 @@ class OrdersController < ApplicationController
   def index
     @store = Store.find(params[:store_id])
     if current_user.local_admin?
+      @completeds =  Order.where(store_id: @store.id, payed: 'completed')
       @orders = Order.where("payed= ? and store_id = ?", 1, @store.id)
     else
+      @completeds =  Order.where(store_id: @store.id, user: current_user, payed: 'completed')
+      @inprocess = Order.where(store_id: @store.id, user: current_user, payed: 'payed')
       @orders = Order.where(store_id: @store.id, user: current_user, payed: 'cart')
     end
     @products = @orders.map do |order|
@@ -62,10 +65,28 @@ class OrdersController < ApplicationController
       end
     end
   end
-  def confirm_orders
+  def payed_orders
     @orders = current_user.cart.update_all("payed = 1")
     redirect_to store_orders_path(params[:store_id])
-end
+  end
+
+  def confirm_order
+    @order = Order.find(params[:id])
+    @order.payed = 'completed'
+    @order.save
+    redirect_to store_orders_path(params[:store_id])
+  end
+
+  def delivered_order
+    @order = Order.find(params[:id])
+    @order.payed = 'delivered'
+    @order.save
+    redirect_to store_orders_path(params[:store_id])
+  end
+  def historial
+    @store = Store.find(params[:store_id])
+    @orders=  Order.where(store_id: @store.id, payed: 'delivered')
+  end
 
   private
 

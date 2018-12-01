@@ -8,6 +8,11 @@
     <ul class="navbar-nav ">
       <% if user_signed_in? %>
       <li class="nav-item active">
+        <% if current_user.local_admin? %>
+          <%= link_to "Historial Pedidos", historial_store_orders_path(current_user.store_id)%>
+          <%= link_to "Pedidos pendientes", store_orders_path(current_user.store_id)%>
+
+        <% end %>
 
       </li>
 

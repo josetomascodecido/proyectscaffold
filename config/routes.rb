@@ -12,8 +12,13 @@ Rails.application.routes.draw do
     resources :products
     resources :orders do
               collection do
-                patch 'confirm_orders'
+                patch 'payed_orders'
+                get 'historial'
               delete 'empty_cart'
+            end
+            member do
+              patch 'confirm_order'
+              patch 'delivered_order'
             end
           end
       # buscar rutas custom to: as:
