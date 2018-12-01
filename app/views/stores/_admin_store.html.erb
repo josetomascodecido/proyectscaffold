@@ -1,17 +1,19 @@
 <div class="container text-center">
-  <h1 class="text-center">Stores</h1>
-  <p  class="btn btn-primary btn-lg"> <%= link_to 'New Store', new_store_path %></p>
+  <h1 class="text-center text-white">Stores</h1>
+  <p  class="btn btn-info btn-lg"> <%= link_to 'New Store', new_store_path, class:'text-white' %></p>
   <table class="table text-center">
     <tbody>
       <% @stores.each do |store| %>
-        <tr scope="row">
-          <td><h3 style="margin-top: 1rem;"  class="text-primary"><%= link_to store.name, store%></h3></td>
-          <td>
-            <p class="btn btn-primary btn-lg" style="margin-top: 1rem;" ><%= link_to 'Menu', store %></p>
-            <p class="btn btn-primary btn-lg" style="margin-top: 1rem;" ><%= link_to 'Edit', edit_store_path(store) %></p>
-            <p class="btn btn-primary btn-lg" style="margin-top: 1rem;" ><%= link_to 'Destroy', store, method: :delete, data: { confirm: 'Are you sure?' } %></p>
-          </td>
-        </tr>
+        <% if current_user.local_admin? and current_user.store == store%>
+
+          <tr scope="row">
+            <td><h3 style="margin-top: 1.5rem;" class="text-white"><%= store.name %></h3></td>
+            <td>
+              <p class="btn btn-info btn-lg" style="margin-top: 1rem;" ><%= link_to 'Menu', store, class:'text-white' %></p>
+              <p class="btn btn-info btn-lg" style="margin-top: 1rem;" ><%= link_to 'Edit', edit_store_path(store), class:'text-white' %></p>
+            </td>
+          </tr>
+        <% end %>
       <% end %>
     </tbody>
   </table>

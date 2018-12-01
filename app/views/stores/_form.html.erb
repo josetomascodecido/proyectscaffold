@@ -1,7 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-12 form-stores bg-light">
-      <h1 class="text-center">New Store</h1>
+    <div class="col-md-10 form-stores bg-light">
       <%= form_with(model: store, local: true) do |form| %>
         <% if store.errors.any? %>
           <div id="error_explanation">
@@ -16,21 +15,21 @@
         <% end %>
 
         <div class="form-group">
-          <h1><%= form.label :name %></h1>
+          <h3><%= form.label :name %></h3>
           <%= form.text_field :name %>
         </div>
 
         <div class="form-group">
-          <h1><%= form.label :address %></h1>
+          <h3><%= form.label :address %></h3>
           <%= form.text_field :address %>
         </div>
 
         <div class="form-group">
-          <h1><%= form.label :rut%></h1>
+          <h3><%= form.label :rut%></h3>
           <%= form.text_field :rut %>
         </div>
         <div class="form-group">
-          <h1><%= form.label :image %></h1>
+          <h3><%= form.label :image %></h3>
           <%= form.text_field :image %>
           <h5><%= form.file_field :image, id: :image  %></h5>
         </div>
@@ -41,7 +40,4 @@
       <% end %>
     </div>
   </div>
-</div>
-<div class="text-center">
-  <h1><%= link_to 'Back', stores_path, class:'btn btn-light'%></h1>
 </div>

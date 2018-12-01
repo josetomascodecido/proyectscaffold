@@ -1,4 +1,3 @@
-
 class OrdersController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
@@ -18,11 +17,11 @@ class OrdersController < ApplicationController
     @cart = current_user.cart
 
     if @cart.pluck(:product_id).include?(params[:product_id].to_i)
-      product = current_user.orders.find_by(product_id: params[:product_id])
+      product = current_user.orders.find_by(product_id: params[:product_id], payed: 0)
       product.quantity += 1
       @order = product
     else
-      product = current_user.orders.build(product_id: @product.id, price: @product.price, payed: false)
+      product = current_user.orders.build(product_id: @product.id, price: @product.price, payed: 'cart')
       @order = Order.new(product_id: @product.id, user: current_user, store_id: @store.id, price: @product.price, quantity: 1)
     end
 
@@ -36,9 +35,13 @@ class OrdersController < ApplicationController
 
   def index
     @store = Store.find(params[:store_id])
-     @orders = Order.where(store_id: @store.id, user: current_user, payed: false)
+    if current_user.local_admin?
+      @orders = Order.where("payed= ? and store_id = ?", 1, @store.id)
+    else
+      @orders = Order.where(store_id: @store.id, user: current_user, payed: 'cart')
+    end
     @products = @orders.map do |order|
-      @products = Product.find(order.product.id)
+    @products = Product.find(order.product.id)
     end
     @total = 0
     @price_quantity = @orders.pluck(:price, :quantity)
@@ -58,21 +61,11 @@ class OrdersController < ApplicationController
 
       end
     end
-  # #   if @order.quantity == 1
-  #     if @order.destroy
-  #       redirect_to store_product_orders_path(:store_id, :product_id), notice: 'Carro actualizado'
-  #     else
-  #       redirect_to store_product_orders_path(:store_id, :product_id), alert: 'Error al actualizar el carro'
-  #     end
-  #   elsif @order.quantity > 1
-  #     @order.quantity -= 1
-  #     if @order.save
-  #       redirect_to store_product_orders_path(:store_id, :product_id), notice: 'Carro actualizado'
-  #     else
-  #       redirect_to store_product_orders_path(:store_id, :product_id), alert: 'Error al actualizar el carro'
-  #     end
-  #   end
   end
+  def confirm_orders
+    @orders = current_user.cart.update_all("payed = 1")
+    redirect_to store_orders_path(params[:store_id])
+end
 
   private
 
@@ -81,4 +74,5 @@ class OrdersController < ApplicationController
   def set_cart
     @setcart = current_user.cart
   end
+
 end

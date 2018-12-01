@@ -1,12 +1,12 @@
 <p id="notice"><%= notice %></p>
 <% if user_signed_in? %>
-  <% if current_user.role == 'admin' %>
-    <%= render 'stores/admin_store' %>
+  <% if current_user.local_admin? %>
+    <%= render 'admin_store' %>
   <% else %>
-    <%= render 'stores/nil_store' %>
+    <%= render 'nil_store' %>
   <% end %>
 <% else %>
-  <%= render 'stores/nil_store' %>
+  <%= render 'nil_store' %>
 <% end %>
 
   <script>

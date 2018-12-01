@@ -1,9 +1,9 @@
-<% if user_signed_in? %>
-  <% if current_user.role == 'admin' %>
-    <%= render 'stores/admin_product' %>
+  <% if user_signed_in? %>
+    <% if current_user.local_admin?%>
+      <%= render 'stores/admin_product' %>
+    <% else %>
+      <%= render 'stores/nil_product' %>
+    <% end %>
   <% else %>
     <%= render 'stores/nil_product' %>
   <% end %>
-<% else %>
-  <%= render 'stores/nil_product' %>
-<% end %>
