@@ -88,7 +88,7 @@ class StoresController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_store
       @store = Store.find(params[:id])
-      @product = Product.find(params[:id])
+      
 
     end
 

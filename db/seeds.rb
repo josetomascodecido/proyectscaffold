@@ -1,3 +1,6 @@
+
+
+
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
@@ -6,19 +9,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 #
-
-# 10.times do |i|
-#   @store = Store.create(name: "tienda#{i + 1}", rut: '12345678')
-#   10.times do |j|
-#     Product.create(
-#                   name: "producto#{j + 1}",
-#                   description: 'papa fritas',
-#                   image:"image_tag shawarma",
-#                   price: 2000,
-#                   store_id: @store.id
-#     )
-#   end
-# end
 addresses = "289 Constitution Court
 Liverpool, NY 13090
 8248 Buttonwood Drive
@@ -35,26 +25,18 @@ New Orleans, LA 70115
 Upland, CA 91784"
 
 Store.destroy_all
+Product.destroy_all
 addresses = addresses.split("\n")
 addresses.each do |address|
-  @stores = Store.create!(name: Faker::Name.name, address: address, rut: '12345678', image: Faker::Company.logo, )
+  @stores = Store.create!(name: Faker::Name.name, address: address, rut: '12345678', image: Faker::Company.logo)
  10.times do |j|
    Product.create(
-                 name: "producto#{j + 1}",
-                 description: 'papa fritas',
-
+                 name: Faker::Food.dish,
+                 description: Faker::Food.description,
+                 image: nil,
                  price: 2000,
                  store_id: @stores.id
    )
   end
-
-   #    Product.create(
-   #                  name: Faker::Food.dish,
-   #                  description: Faker::Food.description,
-   #                  image: File.open('shawarma.jpg'),
-   #                  price: 2000,
-   #                  store_id: @store.id
-   #   )
-   # end
 end
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?

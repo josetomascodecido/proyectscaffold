@@ -4,7 +4,7 @@
 }
 .carousel {
   border: 0.4rem solid #333;
-  margin: -0.7rem 0 0 0 ;
+  margin: 3.5rem 0 0 0 ;
 }
 .table{
   color: floralwhite;
@@ -37,6 +37,7 @@
   background-color: #252525;
   margin: 0 auto auto auto;
 
+
 }
 
 .card-body{
@@ -45,6 +46,17 @@
         margin: 1rem 1rem 1rem 0rem;
       }
 }
+
+.card-david{
+  height: 29rem;
+}
+.card-text .boton-agregar{
+  position: absolute;
+  bottom: 1.5rem;
+
+  color: white;
+}
+
 .barralateral{
   width: 1rem;
   height: 100rem;
@@ -59,4 +71,21 @@
     background-color: red;
     color: white;
     text-align: center;
+}
+.form-products{
+  margin: 0 auto 0 auto;
+  padding: 1rem 2rem 1rem 2rem;
+}
+.form-stores{
+  margin: 0 auto 0 auto;
+  padding: 1rem 2rem 1rem 2rem;
+}
+// borra las lineas de los botones
+a, a:link, a:visited {
+    text-decoration: none !important;
+  }
+
+//background-color
+.admin-menu{
+  background-color: #ffff;
 }

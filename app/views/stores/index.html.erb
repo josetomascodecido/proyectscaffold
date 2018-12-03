@@ -1,16 +1,18 @@
 <p id="notice"><%= notice %></p>
 <% if user_signed_in? %>
-  <% if current_user.role == 'admin' %>
-    <%= render 'stores/admin_store' %>
+  <% if current_user.local_admin? %>
+    <%= render 'admin_store' %>
   <% else %>
-    <%= render 'stores/nil_store' %>
+    <%= render 'nil_store' %>
   <% end %>
 <% else %>
-  <%= render 'stores/nil_store' %>
+  <%= render 'nil_store' %>
 <% end %>
+<div style='width: 800px;'>
+  <div id="map" style='width: 800px; height: 400px;'></div>
+</div>
 
   <script>
-
   handler = Gmaps.build('Google');
   handler.buildMap({
     provider: {

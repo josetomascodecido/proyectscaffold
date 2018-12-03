@@ -1,21 +1,25 @@
-<div class="container text-center">
-  <h1 class="text-center">Products</h1>
-  <table class="table text-center">
-    <h1>          <td><%= link_to 'New Product', new_store_product_path(@store), class: 'btn btn-secondary' %></td>
-</h1>
-    <tbody>
-      <% @store.products.each do |product| %>
-        <tr scope="row">
-          <td><%= image_tag product.image.to_s, style: "max-width: 100%", class: "rounded" %></td>
-          <td><p class="font-weight-bold" style="margin-top: 1rem;" ><%= product.name %></p></td>
-          <td><p class="font-weight-bold" style="margin-top: 1rem;" ><%= product.description%></p></td>
-          <td><p class="font-weight-bold" style="margin-top: 1rem;" ><%= product.price %></p></td>
-          <td><%= link_to 'Edit', edit_store_product_url(@product) %></td>
+  <div class="container text-center">
+    <h1 class="text-center text-white">Products</h1>
+    <h1><%= link_to 'New Product', new_store_product_path(@store), class: 'btn btn-info btn-lg text-white' %></h1>
+    <table class="table text-center">
+      <tbody>
+        <% @store.products.each do |product| %>
+          <tr scope="row">
+            <td><%= image_tag product.image.to_s, style: "max-width: 100%", class: "rounded" %></td>
+            <td><p class="font-weight-bold" style="margin-top: 2rem;" ><%= product.name %></p></td>
+            <td><p class="font-weight-bold" style="margin-top: 2rem;" ><%= product.description%></p></td>
+            <td><p class="font-weight-bold" style="margin-top: 2rem;" ><%= product.price %></p></td>
+            <td>
+              <p class="btn btn-info btn-lg" style="margin-top: 1rem;" ><%= link_to 'Edit', edit_store_product_url(@store, product), class:'text-white' %></p>
+              <p class="btn btn-info btn-lg" style="margin-top: 1rem;" ><%= link_to 'Destroy', store_product_path(@store, product), method: :delete, data: { confirm: 'Are you sure?' }, class:'text-white' %></p>
 
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
-<%= link_to 'Edit', edit_store_path(@store), class: 'btn btn-primary' %>
-<%= link_to 'Back', stores_path, class: 'btn btn-primary' %>
+             </td>
+
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="text-center">
+    <h1><%= link_to 'Back', stores_path, class:'btn btn-lg btn-light'%></h1>
+  </div>

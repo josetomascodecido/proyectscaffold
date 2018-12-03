@@ -1,6 +1,5 @@
-<h1>Editing Store</h1>
-
+<h1 class="text-center text-white" style="margin: 5rem 0 2rem 0;">Editing Store</h1>
 <%= render 'form', store: @store %>
-
-<%= link_to 'Show', @store %> |
-<%= link_to 'Back', stores_path %>
+<div class="text-center">
+  <h1> <%= link_to 'Menu', @store, class:'btn btn-light btn-lg ' %> <%= link_to 'Back', stores_path, class:'btn btn-light btn-lg '%></h1>
+</div>

@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-10">
+    <div class=" col-md-10 form-products bg-light">
       <%= form_for([@store, @product], local: true) do |form| %>
         <% if product.errors.any? %>
           <div id="error_explanation">
@@ -15,30 +15,27 @@
         <% end %>
 
         <div class="form-group">
-          <h1><%= form.label :image %></h1>
-          <%= form.text_field :image %>
-          <h5><%= form.file_field :image, id: :image  %></h5>
+          <h3><%= form.label :name %></h3>
+           <%= form.text_field :name %>
+
         </div>
 
         <div class="form-group">
-          <h1><%= form.label :name %></h1>
-          <%= form.text_field :name %>
-        </div>
-
-        <div class="form-group">
-          <h1><%= form.label :description %></h1>
+          <h3><%= form.label :description %></h3>
           <%= form.text_area :description %>
+
         </div>
 
 
         <div class="form-group">
-          <h1><%= form.label :price %></h1>
+          <h3><%= form.label :price %></h3>
           <%= form.text_field :price %>
         </div>
 
         <div class="form-group">
-          <h1><%= form.label :store_id %></h1>
-          <%= form.text_field :store_id %>
+          <h3><%= form.label :image %></h3>
+          <%= form.text_field :image %>
+          <h5><%= form.file_field :image, id: :image  %></h5>
         </div>
 
         <div class="actions">

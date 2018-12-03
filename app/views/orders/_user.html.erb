@@ -1,0 +1,114 @@
+<div style="margin: 5rem 0 0 0;">
+  <h1 class="text-center text-white" style="margin: 1.5rem auto 1.5rem auto"> <%= @store.name %></h1>
+  <table class="table table-hover text-center">
+  <tr class="text-center">
+    <th class="text-center">
+      Producto
+    </th>
+    <th class="text-center">
+      Description
+    </th>
+    <th class="text-center">
+      Valor Unitario
+    </th>
+    <th class="text-center">
+      Cantidad
+    </th>
+    <th class="text-center">
+      Subtotal
+    </th>
+    <th class="text-center">
+      Remover
+    </th>
+  </tr>
+  <% @orders.each do |order| %>
+    <tr>
+      <td>
+        <%= order.product.name %>
+      </td>
+      <td>
+        <%= order.product.description %>
+      </td>
+      <td>
+        <%= order.product.price %>
+      </td>
+      <td>
+        <%= order.quantity %>
+      </td>
+      <td>
+        <%= order.quantity * order.product.price %>
+      </td>
+      <td>
+        <%= link_to 'Borrar', store_order_path(@store.id,  order), class: "btn btn-info btn-sm text-white", style:"margin: 0.8rem auto 0.8rem auto", method: :delete %>
+      </td>
+  <% end %>
+  <% @inprocess.each do |order| %>
+    <tr>
+      <td>
+        <%= order.product.name %>
+      </td>
+      <td>
+        <%= order.product.description %>
+      </td>
+      <td>
+        <%= order.product.price %>
+      </td>
+      <td>
+        <%= order.quantity %>
+      </td>
+      <td>
+        <%= order.quantity * order.product.price %>
+      </td>
+      <td>
+        <p>En proceso</p>
+      </td>
+  <% end %>
+  <% @completeds.each do |order| %>
+    <tr>
+      <td>
+        <%= order.product.name %>
+      </td>
+      <td>
+        <%= order.product.description %>
+      </td>
+      <td>
+        <%= order.product.price %>
+      </td>
+      <td>
+        <%= order.quantity %>
+      </td>
+      <td>
+        <%= order.quantity * order.product.price %>
+      </td>
+      <td>
+        <p>Retirar pedido</p>
+      </td>
+  <% end %>
+
+  <tr>
+    <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th><h3 class="text-white text-center">Total:</h3></th>
+    <th><h3 class="text-white text-center"><%= @total %></h3></th>
+    <th>
+
+    </th>
+    </tr>
+
+  </table>
+  <div class="row text-center" style="color:white; margin: 0 0 0 0 ">
+    <div class="col-md-4">
+      <%= link_to "Continuar comprando", store_path(@store.id), class: "btn btn-info btn-lg text-white" %>
+    </div>
+
+    <div class="col-md-4">
+      <%= link_to "Confirmar Compra", payed_orders_store_orders_path(@store), method: :patch ,class: "btn btn-info btn-lg text-white" %>
+    </div>
+    <div class="col-md-4">
+      <%= link_to "Vaciar Carro", empty_cart_store_orders_path(@store), class: "btn btn-info btn-lg text-white", method: :delete %>
+    </div>
+  </div>
+
+</div>

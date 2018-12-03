@@ -10,9 +10,17 @@ Rails.application.routes.draw do
   }
   resources :stores do
     resources :products
-    resources :orders, only: [:index, :create, :destroy, :show] do
-              delete 'empty_cart', on: :collection
+    resources :orders do
+              collection do
+                patch 'payed_orders'
+                get 'historial'
+              delete 'empty_cart'
             end
+            member do
+              patch 'confirm_order'
+              patch 'delivered_order'
+            end
+          end
       # buscar rutas custom to: as:
 
   end

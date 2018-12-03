@@ -11,12 +11,13 @@ ActiveAdmin.register User do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
-permit_params :email, :password, :name, :lastname, :address, :role
+permit_params :email, :password, :name, :lastname, :address, :role, :store_id
 
 index do
  column :id
  column :email
  column :role
+ column :store
  column :address
  column :member_since do |user|
    time_ago_in_words(user.created_at)
@@ -31,6 +32,7 @@ form do |f|
       input :lastname
       input :address
       input :role
+      input :store
     end
     actions
   end
@@ -49,4 +51,5 @@ form do |f|
   filter :lastname
   filter :address
   filter :role, as: :select
+  filter :store, as: :select
 end
