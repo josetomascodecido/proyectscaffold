@@ -11,6 +11,8 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'geocoder'
 gem 'gmaps4rails'
 gem 'omniauth-facebook'
+gem 'paypal-sdk-rest'
+
 #gem cancancan
 gem 'cancancan', '~> 2.0'
 gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'

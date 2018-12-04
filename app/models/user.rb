@@ -11,6 +11,7 @@ class User < ApplicationRecord
   geocoded_by :address
   after_validation :geocode
   belongs_to :store, optional: true
+  has_many :billings
 
 
   def cart

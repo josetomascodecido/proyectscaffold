@@ -24,6 +24,13 @@ Rails.application.routes.draw do
       # buscar rutas custom to: as:
 
   end
+  resources :billings, only: [:index] do
+    collection do
+      get 'pre_pay'
+      get 'execute'
+
+    end
+  end
 
   root to: 'stores#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
