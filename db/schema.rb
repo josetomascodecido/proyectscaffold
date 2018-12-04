@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_01_014428) do
+ActiveRecord::Schema.define(version: 2018_12_04_003624) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,7 +49,9 @@ ActiveRecord::Schema.define(version: 2018_12_01_014428) do
     t.string "currency"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
     t.index ["order_id"], name: "index_billings_on_order_id"
+    t.index ["user_id"], name: "index_billings_on_user_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -57,10 +59,12 @@ ActiveRecord::Schema.define(version: 2018_12_01_014428) do
     t.bigint "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "payed", default: 0
     t.decimal "price"
     t.integer "quantity", default: 0
     t.bigint "store_id"
+    t.integer "payed", default: 0
+    t.bigint "billing_id"
+    t.index ["billing_id"], name: "index_orders_on_billing_id"
     t.index ["product_id"], name: "index_orders_on_product_id"
     t.index ["store_id"], name: "index_orders_on_store_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
@@ -96,7 +100,7 @@ ActiveRecord::Schema.define(version: 2018_12_01_014428) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "role", default: 2
+    t.integer "role"
     t.string "name"
     t.string "lastname"
     t.float "latitude"
@@ -111,6 +115,8 @@ ActiveRecord::Schema.define(version: 2018_12_01_014428) do
   end
 
   add_foreign_key "billings", "orders"
+  add_foreign_key "billings", "users"
+  add_foreign_key "orders", "billings"
   add_foreign_key "orders", "products"
   add_foreign_key "orders", "stores"
   add_foreign_key "orders", "users"
