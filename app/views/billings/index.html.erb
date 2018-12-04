@@ -1,0 +1,74 @@
+<div style="margin: 5rem 0 0 0;">
+  <h1 class="text-center text-white" style="margin: 1.5rem auto 1.5rem auto">
+  <table class="table table-hover text-center">
+  <tr class="text-center">
+    <th class="text-center">
+      Producto
+    </th>
+    <th class="text-center">
+      Description
+    </th>
+    <th class="text-center">
+      Valor Unitario
+    </th>
+    <th class="text-center">
+      Cantidad
+    </th>
+    <th class="text-center">
+      Subtotal
+    </th>
+    <% @billings.each do |billing| %>
+    <p> <%= billing.amount %></p>
+
+    <% end %>
+  </tr>
+
+    <tr>
+      <td>
+
+      </td>
+      <td>
+
+      </td>
+      <td>
+
+      </td>
+      <td>
+
+      </td>
+      <td>
+
+      </td>
+      <td>
+
+      </td>
+
+
+
+  <tr>
+    <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th><h3 class="text-white text-center">Total:</h3></th>
+    <th><h3 class="text-white text-center"><%= @total %></h3></th>
+    <th>
+
+    </th>
+    </tr>
+
+  </table>
+  <div class="row text-center" style="color:white; margin: 0 0 0 0 ">
+    <div class="col-md-4">
+
+    </div>
+
+    <div class="col-md-4">
+      <%= link_to "Continuar comprando", root_path, class: "btn btn-info btn-lg text-white" %>
+    </div>
+    <div class="col-md-4">
+
+    </div>
+  </div>
+
+</div>
