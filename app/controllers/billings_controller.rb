@@ -56,7 +56,7 @@
 
 
                 orders = current_user.orders.where(payed: :cart)
-                orders.update_all(payed: :completed, billing_id: billing.id)
+                orders.update_all(payed: :payed, billing_id: billing.id)
 
                 redirect_to root_path, notice: "La compra se realizó con éxito!"
               else
