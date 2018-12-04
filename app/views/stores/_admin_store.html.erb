@@ -1,5 +1,5 @@
   <div class="row">
-    <div class="col-11 col-sm-11 col-md-11 col-lg-11 col-xl-11" style="margin: 3rem auto 0 auto;">
+    <div class="col-11 col-sm-11 col-md-11 col-lg-11 col-xl-11 " style="margin: 3rem auto 0 auto;">
       <table class="table table-bordered table-dark text-center">
         <thead>
           <h1 class="text-center text-white">My Store</h1>
@@ -17,12 +17,12 @@
             <% if current_user.local_admin? and current_user.store == store %>
 
               <tr scope="row">
-                <td><h3 class="text-white"><%= store.name %></h3></td>
-                <td><%= image_tag 'shawarma.jpg', class:"rounded", style:"max-width: 25%;"%></td>
-                <td><%= link_to 'Edit', edit_store_path(store), class:'text-white', class:"btn btn-info btn-lg" %></td>
-                <td><%= link_to 'Menu', store, class:'text-white', class:"btn btn-info btn-lg" %></td>
-                <td><%= link_to "History delivered", historial_store_orders_path(current_user.store_id), class:"btn btn-info btn-lg"%></td>
-                <td><%= link_to "Pending Orders", store_orders_path(current_user.store_id), class:"btn btn-info btn-lg"%></td>
+                <td><h3 class="text-white" style="margin: 2.5rem 0 0 0;"><%= store.name %></h3></td>
+                <td><%= image_tag 'shawarma.jpg', class:"rounded", style:"max-width: 25%; min-width: 7rem;"%></td>
+                <td><%= link_to 'Edit', edit_store_path(store),class:" btn btn-info btn-lg text-white", style:"margin: 2rem 0 0 0;" %></td>
+                <td><%= link_to 'Menu', store, class:"btn btn-info btn-lg text-white", style:"margin: 2rem 0 0 0;" %></td>
+                <td><%= link_to "History delivered", historial_store_orders_path(current_user.store_id), class:"btn btn-info btn-lg text-white", style:"margin: 2.2rem 0 0 0;"%></td>
+                <td><%= link_to "Pending Orders", store_orders_path(current_user.store_id), class:"btn btn-info btn-lg text-white", style:"margin: 2rem 0 0 0;"%></td>
               </tr>
             <% end %>
           <% end %>

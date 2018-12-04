@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Proyectscaffold</title>
+    <title>No + Filas</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,6 +23,9 @@
 
     <%= render 'layouts/navbar' %>
     <%= yield %>
+    <div style="margin-top: 10rem;">
+      <%= render 'layouts/footer' %>
+    </div>
 
 
   </body>
