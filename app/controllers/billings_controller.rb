@@ -2,9 +2,9 @@ class BillingsController < ApplicationController
   include PayPal::SDK::REST
 
 PayPal::SDK::REST.set_config(
-  :mode => "sandbox", # "sandbox" or "live"
-  :client_id => "ARGjuw6WkNh2PeQXdLQDGJYvPukgCwF0ZKQYS3r1SPAV9wuVuwcRJBQBugqaCOQkPKPS07gtOv4vWLoA",
-  :client_secret => "EB5HlBxL9haqmfPIKWOSkzE0-YeRY5gZ9gqN741JD-sbDB5imTrxJ3RWxgl7M1epFVDjx6r7SE3p5gLi")
+  :mode => "live", # "sandbox" or "live"
+  :client_id => "AaN3xkKl7fLOt4jS3Yaaypq5lwZ00sZ6tSO3QISQp55Nd97GoC77n2XSHux5n1jsOvX4vRQW6hBz9-my",
+  :client_secret => "EPuKgpxVjOmwawR_Pt3CQIopQsLXgx1TCJUMdmInKqD3llFBM5G8aslJw80fFaptIVpQ3z8h6cMG48G4")
   before_action :authenticate_user!
 
   def index
