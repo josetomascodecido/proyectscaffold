@@ -1,97 +1,104 @@
-<h2>Sign up</h2>
+<div class="container">
+  <h1 style="margin-top: 5rem;" class="text-center text-white">Sing Up</h1>
+  <div class="row" style="margin-bottom: 10rem;">
+    <div class="col-md-10 form-stores bg-light">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= devise_error_messages! %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
 
+          <div class="field form-group">
+            <h3><%= f.label :name %></h3>
+            <%= f.text_field :name %>
+          </div>
 
-    <div class="field">
-      <%= f.label :name %><br/>
-      <%= f.text_field :name %>
-    </div>
+          <div class="field form-group">
+            <h3><%= f.label :lastname %></h3>
+            <%= f.text_field :lastname %>
+          </div>
 
-    <div class="field">
-      <%= f.label :lastname %><br/>
-      <%= f.text_field :lastname %>
-    </div>
+          <div class="field form-group">
+            <h3><%= f.label :address %></h3>
+            <div class="row">
+              <div class="col-md-11">
+                <%= f.text_field :address %>
+              </div>
+              <div class="col-lg-1">
+                <%= link_to  '#', class:"btn btn-primary text", id:"find-address" do %>
+                  <i class="fa fa-map-marker"> </i>
+                <% end %>
+              </div>
 
-    <div class="field">
-      <%= f.label :address %><br/>
-      <div class="row">
-        <div class="col-md-10">
-          <%= f.text_field :address %>
-        </div>
-        <div class="col-md-2">
-          <%= link_to  '#', class:"btn btn-primary", id:"find-address" do %>
-            <i class="fa fa-map-marker"> </i>
+            </div>
+          </div>
+
+          <div class="field form-group">
+            <h3><%= f.label :email %></h3>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+          </div>
+
+          <div class="field form-group">
+            <h3><%= f.label :password %></h3>
+            <% if @minimum_password_length %>
+            <em>(<%= @minimum_password_length %> characters minimum)</em>
+            <% end %><br />
+            <%= f.password_field :password, autocomplete: "new-password" %>
+          </div>
+
+          <div class="field form-group">
+            <h3><%= f.label :password_confirmation %></h3>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+          </div>
+
+          <div class="actions">
+            <%= f.submit "Sign up" %>
+          </div>
           <% end %>
-        </div>
 
-      </div>
+
+          <%= render "devise/shared/links" %>
+
+        <script>
+          $("#find-address").click(function(event){
+            event.preventDefault();
+            $(this).html('<i class="fa fa-spinner fa-spin"> </i>')
+
+
+              if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(getAddress);
+              } else {
+                $("#find-address").innerHTML = "Geolocation is not supported by this browser.";
+              }
+            });
+
+            function getAddress(position) {
+              // x.innerHTML = "Latitude: " + position.coords.latitude +
+              // "<br>Longitude: " + position.coords.longitude;
+              var latitude = position.coords.latitude;
+              var longitude = position.coords.longitude;
+              $.ajax({
+                url: '/geocoder/findaddress',
+                type: 'GET',
+                dataType: 'script',
+                data: {latitude: latitude, longitude: longitude }
+              })
+              .done(function() {
+                console.log("success");
+              })
+              .fail(function() {
+                console.log("error");
+              })
+              .always(function() {
+                console.log("complete");
+              });
+
+              // .always(function() {
+              //   $("#find-address").html('<i class="fa fa-map-marker> </i>');
+              // });
+
+            }
+        </script>
     </div>
 
-    <div class="field">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-    </div>
+  </div>
 
-    <div class="field">
-      <%= f.label :password %>
-      <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em>
-      <% end %><br />
-      <%= f.password_field :password, autocomplete: "new-password" %>
-    </div>
-
-    <div class="field">
-      <%= f.label :password_confirmation %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-    </div>
-
-    <div class="actions">
-      <%= f.submit "Sign up" %>
-    </div>
-    <% end %>
-
-
-    <%= render "devise/shared/links" %>
-
-  <script>
-    $("#find-address").click(function(event){
-      event.preventDefault();
-      $(this).html('<i class="fa fa-spinner fa-spin"> </i>')
-
-
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(getAddress);
-        } else {
-          $("#find-address").innerHTML = "Geolocation is not supported by this browser.";
-        }
-      });
-
-      function getAddress(position) {
-        // x.innerHTML = "Latitude: " + position.coords.latitude +
-        // "<br>Longitude: " + position.coords.longitude;
-        var latitude = position.coords.latitude;
-        var longitude = position.coords.longitude;
-        $.ajax({
-          url: '/geocoder/findaddress',
-          type: 'GET',
-          dataType: 'script',
-          data: {latitude: latitude, longitude: longitude }
-        })
-        .done(function() {
-          console.log("success");
-        })
-        .fail(function() {
-          console.log("error");
-        })
-        .always(function() {
-          console.log("complete");
-        });
-
-        // .always(function() {
-        //   $("#find-address").html('<i class="fa fa-map-marker> </i>');
-        // });
-
-      }
-  </script>
+</div>

@@ -1,16 +1,21 @@
 <%= render 'layouts/carousel' %>
-  <div class="container text-center">
-    <h1 class="text-center text-white" style="margin: 2rem 0 2rem 0;">Stores</h1>
-    <table class="table text-center">
-      <tbody>
-        <% @stores.each do |store| %>
-          <tr scope="row">
-            <td><h3 style="margin: 2rem auto 2rem auto;" class="text-left"><%= link_to store.name, store, class:"text-white"%></h3></td>
-            <td>
-              <p style="margin: 1.2rem 0 1.2rem 0;" ><%= link_to 'Menu', store, class:"btn btn-info btn-lg text-white" %></p>
-            </td>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12" style="margin: auto 0 10rem 0;">
+        <table class="table-striped table-dark">
+          <tr>
+            <h1 class="text-center text-white" style="margin: 3rem 0 4rem 0;">Stores</h1>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+          <tbody class="view-stores-nil">
+            <% @stores.each do |store| %>
+              <tr>
+                <td><%= image_tag 'shawarma.jpg', class:"rounded float-left", style:"max-width: 25%; min-width: 7rem;"%></td>
+                <td><h3 style="margin: 2rem auto 2rem auto;" class="text-left"><%= link_to store.name, store, class:"text-white"%></h3></td>
+                <td><p style="margin: 1.5rem 0 auto 0;" ><%= link_to 'Menu', store, class:"btn btn-info btn-lg text-white float-right" %></p></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+    </div>
   </div>
+</div>
