@@ -1,102 +1,95 @@
-<div style="margin: 5rem 0 0 0;">
-  <h1 class="text-center text-white" style="margin: 1.5rem auto 1.5rem auto"> <%= @store.name %></h1>
-  <table class="table table-hover text-center">
-  <tr class="text-center">
-    <th class="text-center">
-      Producto
-    </th>
-    <th class="text-center">
-      Valor Unitario
-    </th>
-    <th class="text-center">
-      Cantidad
-    </th>
-    <th class="text-center">
-      Subtotal
-    </th>
-    <th class="text-center">
-      Remover
-    </th>
-  </tr>
-  <% @orders.each do |order| %>
-    <tr>
-      <td>
-        <%= order.product.name %>
-      </td>
-      <td>
-        <%= order.product.price %>
-      </td>
-      <td>
-        <%= order.quantity %>
-      </td>
-      <td>
-        <%= order.quantity * order.product.price %>
-      </td>
-      <td>
-        <%= link_to 'Borrar', store_order_path(@store.id,  order), class: "btn btn-info btn-sm text-white", style:"margin: 0.8rem auto 0.8rem auto", method: :delete %>
-      </td>
-  <% end %>
-  <% @inprocess.each do |order| %>
-    <tr>
-      <td>
-        <%= order.product.name %>
-      </td>
-      <td>
-        <%= order.product.price %>
-      </td>
-      <td>
-        <%= order.quantity %>
-      </td>
-      <td>
-        <%= order.quantity * order.product.price %>
-      </td>
-      <td>
-        <p>En proceso</p>
-      </td>
-  <% end %>
-  <% @completeds.each do |order| %>
-    <tr>
-      <td>
-        <%= order.product.name %>
-      </td>
-      <td>
-        <%= order.product.price %>
-      </td>
-      <td>
-        <%= order.quantity %>
-      </td>
-      <td>
-        <%= order.quantity * order.product.price %>
-      </td>
-      <td>
-        <p>Retirar pedido</p>
-      </td>
-  <% end %>
+<div class="row">
+  <div class="col-11 col-sm-11 col-md-11 col-lg-11 col-xl-11" style="margin: 3rem auto 0 auto;">
+    <table class="table table-bordered table-dark text-center">
+      <h1 class="text-center text-white"><%= @store.name %></h1>
+      <tr>
+        <th class="text-center">
+          Producto
+        </th>
+        <th class="text-center">
+          Valor Unitario
+        </th>
+        <th class="text-center">
+          Cantidad
+        </th>
+        <th class="text-center">
+          Subtotal
+        </th>
+        <th class="text-center">
+          Estado
+        </th>
+      </tr>
+      <% @orders.each do |order| %>
+      <tr>
+        <td>
+          <%= order.product.name %>
+        </td>
+        <td>
+          <%= number_to_currency(order.product.price, precision: 0, seperator: ",", delimiter: ".")%>
+        </td>
+        <td>
+          <%= order.quantity %>
+        </td>
+        <td>
+          <%= number_to_currency(order.quantity * order.product.price, precision: 0, seperator: ",", delimiter: ".")%>
+        </td>
+        <td>
+          No pagado <%= link_to 'Borrar', store_order_path(@store.id, order), class: "btn btn-danger btn-sm text-white", style:"margin: 0.8rem auto 0.8rem auto", method: :delete %>
+        </td>
+        <% end %>
+        <% @inprocess.each do |order| %>
+        <tr>
+          <td>
+            <%= order.product.name %>
+          </td>
+          <td>
+            <%= number_to_currency(order.product.price, precision: 0, seperator: ",", delimiter: ".")%>
+          </td>
+          <td>
+            <%= order.quantity %>
+          </td>
+          <td>
+            <%= number_to_currency(order.quantity * order.product.price, precision: 0, seperator: ",", delimiter: ".")%>
+          </td>
+          <td>
+            <p>En proceso</p>
+          </td>
+          <% end %>
+          <% @completeds.each do |order| %>
+          <tr>
+            <td>
+              <%= order.product.name %>
+            </td>
+            <td>
+              <%= number_to_currency(order.product.price, precision: 0, seperator: ",", delimiter: ".")%>
+            </td>
+            <td>
+              <%= order.quantity %>
+            </td>
+            <td>
+              <%= number_to_currency(order.quantity * order.product.price, precision: 0, seperator: ",", delimiter: ".")%>
+            </td>
+            <td>
+              <p>Retirar pedido</p>
+            </td>
+          </tr>
+          <% end %>
+          <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th class="text-center">No Pagado: <%= number_to_currency(@total, precision: 0, seperator: ",", delimiter: ".")%></th>
+          </tr>
+        </table>
+      </div>
+      <div class="col-11 col-sm-11 col-md-4 col-lg-4 col-xl-4 text-center" style="margin-bottom: 1rem;">
+        <%= link_to "Continuar comprando", store_path(@store.id), class: "btn btn-dark btn-lg text-white" %>
+      </div>
 
-  <tr>
-    <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th><h3 class="text-white text-center">Total:</h3></th>
-    <th><h3 class="text-white text-center"><%= @total %></h3></th>
-    <th>
-
-    </th>
-    </tr>
-
-  </table>
-  <div class="row text-center" style="color:white; margin: 0 0 0 0 ">
-    <div class="col-md-4">
-      <%= link_to "Continuar comprando", store_path(@store.id), class: "btn btn-info btn-lg text-white" %>
+      <div class="col-11 col-sm-11 col-md-4 col-lg-4 col-xl-4 text-center" style="margin-bottom: 1rem;">
+        <%= link_to "Confirmar Compra", payed_orders_store_orders_path(@store), method: :patch ,class: "btn btn-dark btn-lg text-white" %>
+      </div>
+      <div class="col-11 col-sm-11 col-md-4 col-lg-4 col-xl-4 text-center" style="margin-bottom: 1rem;">
+        <%= link_to "Vaciar Carro", empty_cart_store_orders_path(@store), class: "btn btn-dark btn-lg text-white", method: :delete %>
+      </div>
     </div>
-
-    <div class="col-md-4">
-      <%= link_to "Confirmar Compra", payed_orders_store_orders_path(@store), method: :patch ,class: "btn btn-info btn-lg text-white" %>
-    </div>
-    <div class="col-md-4">
-      <%= link_to "Vaciar Carro", empty_cart_store_orders_path(@store), class: "btn btn-info btn-lg text-white", method: :delete %>
-    </div>
-  </div>
-
-</div>
