@@ -7,6 +7,7 @@ class Ability
       can :manage, Order, payed: 'cart', user_id: user.id
       if user.local_admin?  # additional permissions for administrators
         can :manage, Store, user: user
+        can :manage, Store
         can :manage, Product
         can :manage, Order
       end

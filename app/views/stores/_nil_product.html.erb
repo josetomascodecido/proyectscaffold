@@ -1,34 +1,31 @@
 <%= render 'layouts/carousel' %>
 <div class="container">
-  <p id="notice"><%= notice %></p>
-    <div class="row">
+  <div class="row">
+    <p id="notice"><%= notice %></p>
       <div class=" col-md-12 nombretienda">
         <h1 class="text-center text-white"><%= @store.name %></h1>
-        <h1 class="text-center"><%= link_to 'carrito', store_orders_path(@store), class: 'btn btn-info btn-lg text-white'%></h1>
+        <h1 class="text-center"><%= link_to 'carrito', store_orders_path(@store), class: 'btn btn-danger btn-lg text-white'%></h1>
       </div>
 
-    <div class=" col-md-12 tituloproductos text-center">
+    <div class=" col-md-12 tituloproductos">
         <h1 class="text-center text-white">Products</h1>
-      </div>
     </div>
-</div>
-<div class="container">
-  <div class="row">
       <% @store.products.each do |product| %>
-      <div class=" col-12 col-lg-3 ">
-        <div class="card-deck card-david">
-          <div class="card">
-            <div class="card-body">
-              <img class="card-img-top rounded center"><%= image_tag 'shawarma.jpg'%></img>
-              <h5 class="card-title"><%= product.name %></h5>
-              <p class="card-text"><%= product.description%></p>
-              <td><%= number_to_currency(product.price, precision: 0, seperator: ",", delimiter: ".")%></td>
-              <p class="card-text "><%= link_to 'Agregar ', store_orders_path(@store, product_id: product), class: 'boton-agregar btn btn-danger float-right', method: :post %></p>
-            </div>
+          <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 card-deck">
+              <div class="card">
+                <%= image_tag 'shawarma.jpg', class:"card-img-top rounded", alt:"Card image cap"%>
+                <div class="card-body">
+                  <h5 class="card-title"><%= product.name %></h5>
+                  <p class="card-text"><%= product.description%></p>
+                </div>
+                <div class="card-footer text-center">
+                  <h2 class="text-white"><%= number_to_currency(product.price, precision: 0, seperator: ",", delimiter: ".")%></h2>
+                  <small class="text-muted"><%= link_to 'Agregar ', store_orders_path(@store, product_id: product), class: 'btn btn-danger text-white', method: :post %></small>
+                </div>
+              </div>
           </div>
-        </div>
-      </div>
         <% end %>
+
   </div>
 </div>
 <div class="text-center">
