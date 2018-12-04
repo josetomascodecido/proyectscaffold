@@ -21,7 +21,7 @@ class BillingsController < ApplicationController
       payer:  {
         payment_method:  "paypal" },
         redirect_urls: {
-          return_url: execute_billings_url,
+          return_url: execute_billings_url ,
           cancel_url: "http://localhost:3000/" },
           transactions:  [{
             item_list: {
