@@ -1,10 +1,4 @@
 class BillingsController < ApplicationController
-  include PayPal::SDK::REST
-
-PayPal::SDK::REST.set_config(
-  :mode => "live", # "sandbox" or "live"
-  :client_id => "AaN3xkKl7fLOt4jS3Yaaypq5lwZ00sZ6tSO3QISQp55Nd97GoC77n2XSHux5n1jsOvX4vRQW6hBz9-my",
-  :client_secret => "EPuKgpxVjOmwawR_Pt3CQIopQsLXgx1TCJUMdmInKqD3llFBM5G8aslJw80fFaptIVpQ3z8h6cMG48G4")
   before_action :authenticate_user!
 
   def index
@@ -22,7 +16,7 @@ PayPal::SDK::REST.set_config(
       item[:quantity] = order.quantity
       item
     end
-    @payment = Payment.new({
+    @payment = PayPal::SDK::REST::Payment.new({
       intent: "sale",
       payer:  {
         payment_method:  "paypal" },
