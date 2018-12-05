@@ -1,4 +1,4 @@
-class CreateBillings < ActiveRecord::Migration[5.2]
+class CreateBillings < ActiveRecord::Migration[5.1]
   def change
     create_table :billings do |t|
       t.references :order, foreign_key: true
