@@ -8,6 +8,7 @@
 
       <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
+          
           <% if user_signed_in? %>
 
             <% if current_user.local_admin? %>
@@ -42,7 +43,9 @@
             <li class="nav-item active">
               <p id="notice" class="nav-link"><%= notice %></p>
             </li>
+
           </ul>
+
       </div>
     </nav>
 
