@@ -59,9 +59,10 @@ class OrdersController < ApplicationController
         respond_to do |format|
         if @order.destroy
           format.html { redirect_to store_orders_path(params[:store_id]), notice: 'eliminado exitosamente'}
+          format.js
         else
           format.html { redirect_to store_orders_path(params[:store_id]), notice: 'no pudimos eliminar tu producto'}
-
+          format.js
       end
     end
   end

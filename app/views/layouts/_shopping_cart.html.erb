@@ -1,0 +1,61 @@
+<% if current_user.present?%>
+  <button class="btn black btn-lg btn-block fixed-bottom" data-toggle="modal" data-target="#canasta">hola | <i class="fa fa-shopping-basket"></i> Ver Canasta | $<%=  %> | </button>
+
+  <div class="modal micanasta" id="canasta">
+    <div class="right white b-t" style="width: 700px">
+      <div class="row-col"><a data-dismiss="modal" class="pull-right text-muted text-lg p-a-sm m-r-sm">×</a>
+
+          <div class="p-a b-b">
+            <span class="h5">Canasta de <%= current_user.name + ' ' + current_user.lastname  %></span>
+          </div>
+
+          <div class="row">
+                <div class="col-12" style="overflow: scroll;">
+                  <table class="table table-hover">
+                    <tr>
+                      <th class="text-center">
+                        Producto
+                      </th>
+                      <th class="text-center">
+                        Valor Unitario
+                      </th>
+                      <th class="text-center">
+                        Cantidad
+                      </th>
+                      <th class="text-center">
+                        Subtotal
+                      </th>
+                      <th class="text-center">
+                        Estado
+                      </th>
+                    </tr>
+                    <% @orders.each do |order| %>
+                    <tr>
+                      <td class="text-center"><%= order.product.name%></td>
+                      <td class="text-center"><%= number_to_currency(order.product.price, precision: 0, seperator: ",", delimiter: ".")%></td>
+                      <td class="text-center"><%= order.quantity%></td>
+                      <td class="text-center"><%= number_to_currency(order.quantity * order.product.price, precision: 0, seperator: ",", delimiter: ".")%></td>
+                      <td><%= link_to 'borrar', store_order_path(@store.id, order), remote: true, method: :delete, data: { confirm: 'Seguro?' } %><td>
+
+                    <tr>
+                    <% end %>
+                    <tr>
+
+                      <th></th>
+                      <th></th>
+                      <th class="text-center">No Pagado: <%= number_to_currency(@total, precision: 0, seperator: ",", delimiter: ".")%></th>
+                    </tr>
+                  </table>
+                </div>
+          </div>
+
+          <%= link_to 'Confirmar compra', pre_pay_billings_path, class:'btn btn-succes float-right' %>
+
+        </div>
+      </div>
+    </div>
+  <% end %><!--END del if que mustra la canasta %>-->
+
+
+</div>
+</div>
