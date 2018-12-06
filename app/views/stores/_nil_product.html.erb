@@ -19,7 +19,7 @@
                 </div>
                 <div class="card-footer text-center">
                   <h2 class="text-white"><%= number_to_currency(product.price, precision: 0, seperator: ",", delimiter: ".")%></h2>
-                  <small class="text-muted"><%= link_to 'Agregar ', store_orders_path(@store, product_id: product), class: 'btn btn-danger text-white', method: :post %></small>
+                  <small class="text-muted"><%= link_to 'Agregar ', store_orders_path(@store, product_id: product), class: 'btn btn-danger text-white', remote: true, method: :post %></small>
                 </div>
               </div>
           </div>

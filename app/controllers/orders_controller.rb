@@ -24,12 +24,15 @@ class OrdersController < ApplicationController
       product = current_user.orders.build(product_id: @product.id, price: @product.price, payed: 'cart')
       @order = Order.new(product_id: @product.id, user: current_user, store_id: @store.id, price: @product.price, quantity: 1)
     end
-
-    if @order.save
-
-      redirect_to @store, notice: 'Tu producto fue agregado al carro!'
-    else
-      redirect_to @store, alert: 'Intenta nuevamente CTM!'
+    @orders = Order.where(store_id: @store.id, user: current_user, payed: 'cart')
+    respond_to do |format|
+      if @order.save
+        @r =  'Tu producto fue agregado al carro!'
+        format.js #,  {notice: 'Tu producto fue agregado al carro!'}
+      else
+        @r = 'Intenta nuevamente CTM!'
+        format.js #,  {alert: 'Intenta nuevamente CTM!'}
+      end
     end
   end
 

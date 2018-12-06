@@ -39,7 +39,7 @@ class StoresController < ApplicationController
     @price_quantity.each do |price|
       @total += (price[0]*price[1]).to_i
     end
-    
+
   end
 
   # GET /stores/new
