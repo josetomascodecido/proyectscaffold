@@ -1,5 +1,5 @@
 <% if current_user.present?%>
-  <button class="btn black btn-lg btn-block fixed-bottom" data-toggle="modal" data-target="#canasta">Hola <%= current_user.name.capitalize! %> <%= current_user.lastname.capitalize! %>| <i class="fa fa-shopping-basket"></i> Ver Canasta <%=  %> | </button>
+  <button class="btn black btn-lg btn-block fixed-bottom" data-toggle="modal" data-target="#canasta">Hola <%= current_user.name %> <%= current_user.lastname %>| <i class="fa fa-shopping-basket"></i> Ver Canasta <%=  %> | </button>
 
   <div class="modal micanasta" id="canasta">
     <div class="right white b-t" style="width: 50vh">
