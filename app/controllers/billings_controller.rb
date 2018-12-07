@@ -4,6 +4,7 @@
   def index
     @billings = current_user.billings
   end
+
   def pre_pay
     orders = current_user.orders.where(payed: :cart)
     total = orders.pluck("price * quantity").sum()
@@ -16,13 +17,13 @@
       item[:quantity] = order.quantity
       item
     end
+
     @payment = PayPal::SDK::REST::Payment.new({
       intent: "sale",
-      payer:  {
-        payment_method:  "paypal" },
-        redirect_urls: {
-          return_url: execute_billings_url ,
-          cancel_url: "http://localhost:3000/" },
+      payer:  { payment_method:  "paypal" },
+      redirect_urls: {
+                      return_url: execute_billings_url ,
+                      cancel_url: "/" },
           transactions:  [{
             item_list: {
               items: items
