@@ -1,0 +1,6 @@
+var ele = $("#order-<%= @order.id %>")
+ele.toggle(400);
+alert(ele.data("value"))
+var value = $("#delete").text()
+
+$("#delete").text(parseInt(value) - parseInt(ele.data("value")))

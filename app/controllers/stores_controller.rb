@@ -32,6 +32,13 @@ class StoresController < ApplicationController
   # GET /stores/1
   # GET /stores/1.json
   def show
+    @orders = Order.where(store_id: @store.id, user: current_user, payed: 'cart')
+    @store = Store.find(params[:id])
+    @total = 0
+    @price_quantity = @orders.pluck(:price, :quantity)
+    @price_quantity.each do |price|
+      @total += (price[0]*price[1]).to_i
+    end
 
   end
 
@@ -88,7 +95,7 @@ class StoresController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_store
       @store = Store.find(params[:id])
-      
+
 
     end
 

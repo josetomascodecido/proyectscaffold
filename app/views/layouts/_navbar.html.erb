@@ -1,39 +1,53 @@
-<nav class=" navbar navbar-dark bg-dark fixed-top">
-  <a class="navbar-brand" href="#"><%= link_to "No + filas",   stores_path%></a>
+<div class="row">
+  <div class="col-lg-12">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <%= link_to "No + filas",   stores_path, class:"navbar-brand" %>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
-    <ul class="navbar-nav ">
-      <% if user_signed_in? %>
-      <li class="nav-item active">
-        <% if current_user.local_admin? %>
-          <%= link_to "Historial Pedidos", historial_store_orders_path(current_user.store_id)%>
-          <%= link_to "Pedidos pendientes", store_orders_path(current_user.store_id)%>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+          
+          <% if user_signed_in? %>
 
-        <% end %>
+            <% if current_user.local_admin? %>
+              <li class="nav-item active">
+                <%= link_to "Historial Pedidos", historial_store_orders_path(current_user.store_id), class:"nav-link"%>
+              </li>
+              <li class="nav-item active">
+                <%= link_to "Pedidos pendientes", store_orders_path(current_user.store_id), class:"nav-link"%>
+              </li>
+            <% end %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <%= current_user.email%>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                 <%= link_to "New password", new_user_password_path(@user), class:"dropdown-item"%>
+                <%= link_to "Edit my count", edit_user_registration_path(@user), class:"dropdown-item"%>
+                <%=link_to "salir", destroy_user_session_path, class:"nav-link", class:"dropdown-item", method: :delete %>
+              </div>
+            </li>
+            <% else %>
 
-      </li>
+              <li class="nav-item active">
+                <%= link_to "Ingresar", new_user_session_path, class:"nav-link" %>
+              </li>
+              <li class="nav-item active">
+                <%= link_to "Registrarse", new_user_registration_path, class:"nav-link"%>
+              </li>
 
-      <li class="nav-item dropdown ">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <%= current_user.email %>
-          <% else %>
-            <%= link_to "Ingresar", new_user_session_path, class: "dropdown-item"%>
-          <% end %>
-          <span class="caret"></span>
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <% if user_signed_in?  %>
 
-          <%= link_to "salir", destroy_user_session_path, class: "dropdown-item", method: :delete%>
-          <% else %>
-            <%= link_to "Registrarse", new_user_registration_path, class: "dropdown-item"%>
-            <%= link_to "Ingresar", new_user_session_path, class: "dropdown-item"%>
-          <% end %>
-        </div>
-      </li>
-    </ul>
+            <% end %>
+            <li class="nav-item active">
+              <p id="notice" class="nav-link"><%= notice %></p>
+            </li>
+
+          </ul>
+
+      </div>
+    </nav>
+
   </div>
-</nav>
+</div>

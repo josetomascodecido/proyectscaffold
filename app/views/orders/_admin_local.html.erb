@@ -1,74 +1,83 @@
-<div style="margin: 5rem 0 0 0;">
-  <h1 class="text-center text-white" style="margin: 1.5rem auto 1.5rem auto"> <%= @store.name %></h1>
-  <table class="table table-hover text-center">
-  <tr class="text-center">
-    <th class="text-center">
-      Cliente
-    </th>
-    <th class="text-center">
-      Producto
-    </th>
-    <th class="text-center">
-      Description
-    </th>
-    <th class="text-center">
-      Valor Unitario
-    </th>
-    <th class="text-center">
-      Cantidad
-    </th>
-    <th class="text-center">
-      Subtotal
-    </th>
-    <th class="text-center">
-      Estado
-    </th>
-  </tr>
-  <% @orders.each do |order| %>
-    <tr>
-      <td>
-        <%= order.user.name %>
-      </td>
-      <td>
-        <%= order.product.name %>
-      </td>
-      <td>
-        <%= order.product.description %>
-      </td>
-      <td>
-        <%= order.product.price %>
-      </td>
-      <td>
-        <%= order.quantity %>
-      </td>
-      <td>
-        <%= order.quantity * order.product.price %>
-      </td>
-      <td>
-        <%= link_to 'completado', confirm_order_store_order_path(@store, order), class: "btn btn-info btn-sm text-white", style:"margin: 0.8rem auto 0.8rem auto", method: :patch%>
-      </td>
-  <% end %>
-  <% @completeds.each do |order| %>
-    <tr>
-      <td>
-        <%= order.product.name %>
-      </td>
-      <td>
-        <%= order.product.description %>
-      </td>
-      <td>
-        <%= order.product.price %>
-      </td>
-      <td>
-        <%= order.quantity %>
-      </td>
-      <td>
-        <%= order.quantity * order.product.price %>
-      </td>
-      <td>
-        <%= link_to 'Entregar', delivered_order_store_order_path(@store, order), class: "btn btn-info btn-sm text-white", style:"margin: 0.8rem auto 0.8rem auto", method: :patch%>
-      </td>
-  <% end %>
-  </table>
-
+<div class="">
+  <div class="row">
+    <div class="col-11 col-sm-11 col-md-11 col-lg-11 col-xl-11" style="margin: 3rem auto 0 auto ;">
+      <table class="table table-bordered table-dark text-center">
+        <tr>
+          <h1 class="text-center text-white"> <%= @store.name %></h1>
+          <th class="text-center">
+            Cliente
+          </th>
+          <th class="text-center">
+            Producto
+          </th>
+          <th class="text-center">
+            Description
+          </th>
+          <th class="text-center">
+            Valor Unitario
+          </th>
+          <th class="text-center">
+            Cantidad
+          </th>
+          <th class="text-center">
+            Subtotal
+          </th>
+          <th class="text-center">
+            Estado
+          </th>
+        </tr>
+        <% @orders.each do |order| %>
+          <tr>
+            <td>
+              <%= order.user.name %>
+            </td>
+            <td>
+              <%= order.product.name %>
+            </td>
+            <td>
+              <%= order.product.description %>
+            </td>
+            <td>
+              <%= number_to_currency(order.product.price, precision: 0, seperator: ",", delimiter: ".")%>
+            </td>
+            <td>
+              <%= order.quantity %>
+            </td>
+            <td>
+              <%= number_to_currency(order.quantity * order.product.price, precision: 0, seperator: ",", delimiter: ".")%>
+            </td>
+            <td>
+              <%= link_to 'completado', confirm_order_store_order_path(@store, order), class: "btn btn-info btn-sm text-white", style:"margin: 0.8rem auto 0.8rem auto", method: :patch%>
+            </td>
+        <% end %>
+        <% @completeds.each do |order| %>
+          <tr>
+            <td>
+              <%= order.user.name %>
+            </td>
+            <td>
+              <%= order.product.name %>
+            </td>
+            <td>
+              <%= order.product.description %>
+            </td>
+            <td>
+              <%= number_to_currency(order.product.price, precision: 0, seperator: ",", delimiter: ".")%>
+            </td>
+            <td>
+              <%= order.quantity %>
+            </td>
+            <td>
+              <%= number_to_currency(order.quantity * order.product.price, precision: 0, seperator: ",", delimiter: ".")%>
+            </td>
+            <td>
+              <%= link_to 'Entregar', delivered_order_store_order_path(@store, order), class: "btn btn-info btn-sm text-white", style:"margin: 0.8rem auto 0.8rem auto", method: :patch%>
+            </td>
+        <% end %>
+      </table>
+      <div class="text-center">
+        <h1><%= link_to 'Back', stores_path, class:'btn btn-light btn-lg '%></h1>
+      </div>
+    </div>
+  </div>
 </div>

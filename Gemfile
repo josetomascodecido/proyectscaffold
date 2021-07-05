@@ -5,7 +5,7 @@ ruby '2.4.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'carrierwave', '~> 1.0'
-gem 'rails', '~> 5.2.1'
+gem 'rails', '5.2.1'
 gem 'activeadmin'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'geocoder'

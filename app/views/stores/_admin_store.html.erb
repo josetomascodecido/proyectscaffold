@@ -1,20 +1,32 @@
-<div class="container text-center">
-  <h1 class="text-center text-white">Stores</h1>
-  <p  class="btn btn-info btn-lg"> <%= link_to 'New Store', new_store_path, class:'text-white' %></p>
-  <table class="table text-center">
-    <tbody>
-      <% @stores.each do |store| %>
-        <% if current_user.local_admin? and current_user.store == store%>
-
-          <tr scope="row">
-            <td><h3 style="margin-top: 1.5rem;" class="text-white"><%= store.name %></h3></td>
-            <td>
-              <p class="btn btn-info btn-lg" style="margin-top: 1rem;" ><%= link_to 'Menu', store, class:'text-white' %></p>
-              <p class="btn btn-info btn-lg" style="margin-top: 1rem;" ><%= link_to 'Edit', edit_store_path(store), class:'text-white' %></p>
-            </td>
+  <div class="row">
+    <div class="col-11 col-sm-11 col-md-11 col-lg-11 col-xl-11 " style="margin: 3rem auto 0 auto;">
+      <table class="table table-bordered table-dark text-center">
+        <thead>
+          <h1 class="text-center text-white">Mi tienda</h1>
+          <tr>
+            <td><h3 class="text-white">Name</h3></td>
+            <td><h3 class="text-white">Image</h3></td>
+            <td><h3 class="text-white">Edit</h3></td>
+            <td><h3 class="text-white">Menu</h3></td>
+            <td><h3 class="text-white">History delivered</h3>
+            <td><h3 class="text-white">Pending Orders</h3></td>
           </tr>
-        <% end %>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+        </thead>
+        <tbody>
+          <% @stores.each do |store| %>
+            <% if current_user.local_admin? and current_user.store == store %>
+
+              <tr scope="row">
+                <td><h3 class="text-white" style="margin: 2.5rem 0 0 0;"><%= store.name %></h3></td>
+                <td><%= image_tag 'shawarma.jpg', class:"rounded", style:"max-width: 25%; min-width: 7rem;"%></td>
+                <td><%= link_to 'Edit', edit_store_path(store),class:" btn btn-info btn-lg text-white", style:"margin: 2rem 0 0 0;" %></td>
+                <td><%= link_to 'Menu', store, class:"btn btn-info btn-lg text-white", style:"margin: 2rem 0 0 0;" %></td>
+                <td><%= link_to "History delivered", historial_store_orders_path(current_user.store_id), class:"btn btn-info btn-lg text-white", style:"margin: 2.2rem 0 0 0;"%></td>
+                <td><%= link_to "Pending Orders", store_orders_path(current_user.store_id), class:"btn btn-info btn-lg text-white", style:"margin: 2rem 0 0 0;"%></td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>

@@ -1,16 +1,14 @@
-<p id="notice"><%= notice %></p>
 <% if user_signed_in? %>
   <% if current_user.local_admin? %>
     <%= render 'admin_store' %>
   <% else %>
     <%= render 'nil_store' %>
+    <%= render 'about_us' %>
   <% end %>
 <% else %>
   <%= render 'nil_store' %>
+  <%= render 'about_us' %>    
 <% end %>
-<div style='width: 800px;'>
-  <div id="map" style='width: 800px; height: 400px;'></div>
-</div>
 
   <script>
   handler = Gmaps.build('Google');
